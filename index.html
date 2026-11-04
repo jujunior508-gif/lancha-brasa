@@ -30,7 +30,7 @@
   --bg:#FAF7F3; --surface:#FFFFFF; --surface-2:#F3ECE5; --ink:#1F1512; --muted:#6B5B54; --line:#E6DBD2;
   --ember:#B5421A; --ember-ink:#FFFFFF; --gold:#E8A63A; --herb:#4C7A2A;
   --char:#17110E; --char-2:#211814; --char-3:#2C211C; --on-char:#F6EDE6; --on-char-muted:#BCA79C;
-  --studio:radial-gradient(120% 95% at 50% 28%,#40302A 0%,#231915 55%,#140E0B 100%);
+  --studio:radial-gradient(6px 6px at 18% 16%,rgba(255,200,130,.5),transparent),radial-gradient(10px 10px at 80% 12%,rgba(255,170,90,.35),transparent),radial-gradient(14px 14px at 70% 30%,rgba(255,215,160,.18),transparent),radial-gradient(8px 8px at 30% 34%,rgba(255,185,110,.22),transparent),radial-gradient(55% 45% at 50% 34%,rgba(255,170,90,.22),transparent 72%),linear-gradient(#2E211B,#1A120E 62%,#120C09);
   --shadow:0 1px 2px rgba(31,21,18,.06),0 22px 40px -22px rgba(31,21,18,.45);
   --f-display:"Big Shoulders Display","Arial Narrow",Impact,system-ui,sans-serif;
   --f-body:"Figtree",system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;
@@ -213,6 +213,8 @@ button{font:inherit;cursor:pointer;color:inherit}
 .card.enter{animation:cardIn .7s cubic-bezier(.2,.9,.2,1) backwards;animation-delay:calc(var(--n) * 70ms)}
 @keyframes cardIn{from{opacity:0;transform:translateY(40px) scale(.96)}}
 .pic{position:relative;aspect-ratio:5/4;max-width:100%;background:var(--studio);display:grid;place-items:center;overflow:hidden}
+.pic:not(.has-photo)::before{content:"";position:absolute;left:0;right:0;bottom:0;height:30%;background:repeating-linear-gradient(178deg,rgba(255,220,180,.035) 0 2px,transparent 2px 9px),linear-gradient(#3B281C,#21160F);border-top:1px solid rgba(255,200,150,.14);box-shadow:inset 0 14px 22px -14px rgba(0,0,0,.8)}
+.pic svg{position:relative;z-index:1}
 .pic::after{content:"";position:absolute;inset:0;background:radial-gradient(60% 40% at 50% 0%,rgba(255,214,160,.16),transparent 70%);pointer-events:none}
 .pic .photo{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;transition:transform .8s cubic-bezier(.2,.8,.2,1),filter .4s}
 .pic.has-photo::after{background:linear-gradient(to top,rgba(10,6,4,.45),transparent 40%),radial-gradient(60% 40% at 50% 0%,rgba(255,214,160,.12),transparent 70%)}
@@ -646,6 +648,8 @@ button{font:inherit;cursor:pointer;color:inherit}
     <linearGradient id="gChurro" x1="0" y1="0" x2="1" y2="0"><stop offset="0" stop-color="#A5601F"/><stop offset=".45" stop-color="#EDB262"/><stop offset="1" stop-color="#A05A1C"/></linearGradient>
     <linearGradient id="gFlan" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#FFE9A8"/><stop offset="1" stop-color="#E8B54E"/></linearGradient>
     <linearGradient id="gCaramel" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#C2621F"/><stop offset="1" stop-color="#5E2406"/></linearGradient>
+    <radialGradient id="gSlate" cx=".45" cy=".3" r=".8"><stop offset="0" stop-color="#4E4843"/><stop offset=".6" stop-color="#2E2926"/><stop offset="1" stop-color="#191614"/></radialGradient>
+    <linearGradient id="gBoard" x1="0" y1="0" x2="1" y2="0"><stop offset="0" stop-color="#5A3B22"/><stop offset=".5" stop-color="#7A5230"/><stop offset="1" stop-color="#4E321C"/></linearGradient>
     <filter id="fBlur" x="-20%" y="-100%" width="140%" height="300%"><feGaussianBlur stdDeviation="4"/></filter>
     <filter id="fBlurS" x="-10%" y="-100%" width="120%" height="300%"><feGaussianBlur stdDeviation="1.4"/></filter>
   </defs>
@@ -959,7 +963,7 @@ function speckle(size, n, colors, seed){
   try{return c.toDataURL()}catch(e){return ''}
 }
 const defs=$('#sharedDefs');
-[['pCrust',speckle(64,260,['#1A0904','#2A1208','#A0603A'],7)],['pCrumb',speckle(48,90,['#B97A3A','#FFF3D8'],3)],['pBatter',speckle(40,110,['#8E4E18','#FFE3A6'],9)]]
+[['pCrust',speckle(64,260,['#1A0904','#2A1208','#A0603A'],7)],['pCrumb',speckle(48,90,['#B97A3A','#FFF3D8'],3)],['pBatter',speckle(40,110,['#8E4E18','#FFE3A6'],9)],['pBun',speckle(64,170,['#7A3A10','#FFE6B8','#9C4E18'],11)]]
   .forEach(([id,u])=>{if(u)defs.insertAdjacentHTML('beforeend',`<pattern id="${id}" width="64" height="64" patternUnits="userSpaceOnUse"><image href="${u}" width="64" height="64"/></pattern>`)});
 
 /* ---------- Burger layers (y = bottom edge of the layer, 300-wide stage) ---------- */
@@ -1017,9 +1021,10 @@ const avocado=(y,R)=>[46,112,178,244].map(x=>`<ellipse cx="${x}" cy="${y-5}" rx=
 const mush=(y,R)=>[30,80,130,180,230,272].map(x=>{const w=24+R()*4;return `<path d="M${f1(x-w)} ${y}Q${f1(x-w)} ${y-13} ${x} ${y-13}Q${f1(x+w)} ${y-13} ${f1(x+w)} ${y}Z" fill="url(#gMush)"/><path d="M${f1(x-w*.55)} ${y-8}Q${x} ${y-12} ${f1(x+w*.4)} ${y-9}" stroke="#E9C9A6" stroke-opacity=".6" stroke-width="1.5" fill="none"/>`}).join('');
 function bunBottom(y){const t=y-34;return `<path d="M16 ${t+5}Q16 ${t} 24 ${t}H276Q284 ${t} 284 ${t+5}L280 ${y-12}Q276 ${y} 258 ${y}H42Q24 ${y} 20 ${y-12}Z" fill="url(#gBunBot)"/><path d="M17 ${t+3}Q17 ${t} 25 ${t}H275Q283 ${t} 283 ${t+3}V${t+8}H17Z" fill="#F4DDB0"/><rect x="17" y="${t}" width="266" height="8" fill="url(#pCrumb)" opacity=".7"/><ellipse cx="96" cy="${y-15}" rx="56" ry="5" fill="url(#gShine)" opacity=".55"/>`}
 function bunTop(y,R){
-  const h=84,t=y-h;let s=`<path d="M10 ${y}C2 ${y-h*.45} 40 ${t+4} 150 ${t}C260 ${t+4} 298 ${y-h*.45} 290 ${y}Q150 ${y+7} 10 ${y}Z" fill="url(#gBunTop)"/>`;
+  const h=84,t=y-h,dome=`M10 ${y}C2 ${y-h*.45} 40 ${t+4} 150 ${t}C260 ${t+4} 298 ${y-h*.45} 290 ${y}Q150 ${y+7} 10 ${y}Z`;
+  let s=`<path d="${dome}" fill="url(#gBunTop)"/><path d="${dome}" fill="url(#pBun)" opacity=".5"/><path d="M18 ${y-6}C14 ${y-h*.4} 46 ${t+10} 150 ${t+6}C254 ${t+10} 286 ${y-h*.4} 282 ${y-6}" fill="none" stroke="#6E300C" stroke-opacity=".22" stroke-width="5"/>`;
   s+=`<path d="M12 ${y-1}Q150 ${y+6} 288 ${y-1}Q150 ${y+11} 12 ${y-1}Z" fill="#F2D3A0"/>`;
-  s+=`<ellipse cx="108" cy="${t+h*.27}" rx="72" ry="22" fill="url(#gShine)" transform="rotate(-8 108 ${t+h*.27})"/>`;
+  s+=`<ellipse cx="108" cy="${t+h*.27}" rx="72" ry="22" fill="url(#gShine)" transform="rotate(-8 108 ${t+h*.27})"/><ellipse cx="92" cy="${t+h*.2}" rx="16" ry="5" fill="#fff" opacity=".35" transform="rotate(-14 92 ${t+h*.2})"/>`;
   for(let i=0;i<24;i++){const x=34+R()*232,fx=1-Math.pow((x-150)/140,2),yy=y-12-R()*(h*fx-22),r=f1((R()-.5)*80);
     s+=`<ellipse cx="${f1(x)}" cy="${f1(yy)}" rx="4.8" ry="2.2" fill="url(#gSeed)" stroke="#8A4512" stroke-opacity=".35" stroke-width=".8" transform="rotate(${r} ${f1(x)} ${f1(yy)})"/>`}
   return s;
@@ -1047,7 +1052,7 @@ const LAYERS={
   mush:{h:12,d:(y,R)=>mush(y,R)},
   bunTop:{h:84,d:(y,R)=>bunTop(y,R)}
 };
-function burgerSVG(layers,seed=1,spread=0,cls=''){
+function burgerSVG(layers,seed=1,spread=0,cls='',board=false){
   const R=rng(seed),OV=3,n=layers.length;
   const total=layers.reduce((a,k)=>a+LAYERS[k].h,0)-OV*(n-1);
   const H=total+34;let y=H-24,out='';const centers=[];
@@ -1055,12 +1060,13 @@ function burgerSVG(layers,seed=1,spread=0,cls=''){
     out+=`<g class="layer" style="--i:${i}" data-i="${i}">${i?`<ellipse cx="150" cy="${y+2}" rx="138" ry="4.5" fill="#1A0A04" opacity=".42" filter="url(#fBlurS)"/>`:''}${L.d(y,R)}</g>`;
     y-=L.h-OV});
   const extra=(n-1)*spread,vb=`-14 ${-extra/2} 328 ${H+extra}`;
-  const ground=`<ellipse cx="150" cy="${H-16}" rx="150" ry="10" fill="#000" opacity=".5" filter="url(#fBlur)"/>`;
+  const ground=board?`<ellipse cx="150" cy="${H-10}" rx="170" ry="15" fill="#000" opacity=".6" filter="url(#fBlur)"/><ellipse cx="150" cy="${H-17}" rx="164" ry="14" fill="url(#gSlate)"/><ellipse cx="150" cy="${H-18.5}" rx="160" ry="12" fill="none" stroke="#fff" stroke-opacity=".1" stroke-width="1.2"/><ellipse cx="150" cy="${H-22}" rx="140" ry="7" fill="#000" opacity=".55" filter="url(#fBlurS)"/>`
+    :`<ellipse cx="150" cy="${H-16}" rx="150" ry="10" fill="#000" opacity=".5" filter="url(#fBlur)"/>`;
   return {html:`<svg class="burger ${cls}" viewBox="${vb}" aria-hidden="true">${ground}${out}</svg>`,H,centers,extra};
 }
 
 /* ---------- Sides & drinks ---------- */
-const wrapSide=inner=>`<svg class="side" viewBox="0 0 320 260" aria-hidden="true"><ellipse cx="160" cy="246" rx="112" ry="10" fill="#000" opacity=".5" filter="url(#fBlur)"/>${inner}</svg>`;
+const wrapSide=inner=>`<svg class="side" viewBox="0 0 320 260" aria-hidden="true"><ellipse cx="160" cy="252" rx="150" ry="12" fill="#000" opacity=".6" filter="url(#fBlur)"/><ellipse cx="160" cy="246" rx="146" ry="14" fill="url(#gBoard)"/><path d="M30 244q130 -6 260 0M44 249q116 -5 232 0" stroke="#3A2414" stroke-opacity=".45" stroke-width="1" fill="none"/><ellipse cx="160" cy="243" rx="142" ry="11" fill="none" stroke="#C99766" stroke-opacity=".25" stroke-width="1"/>${inner}</svg>`;
 function fries(loaded,seed,grad='gFry',w=14){
   const R=rng(seed);let s=`<path d="M86 104L234 104L244 122L76 122Z" fill="#6E1E06"/>`;const n=Math.round(20*14/w);
   for(let i=0;i<n;i++){const x=88+R()*(144-w),top=26+R()*50,h=150-top+R()*20,r=f1((R()-.5)*30);
@@ -1274,7 +1280,7 @@ const item=key=>{if(String(key).startsWith('custom|'))return customItem(key);con
   return c?{m,name:m.name+' + combo',price:m.price+COMBO}:{m,name:m.name,price:m.price}};
 const norm=t=>t.normalize('NFD').replace(/[̀-ͯ]/g,'').toLowerCase();
 const artCache={};
-const art=m=>artCache[m.id]||(artCache[m.id]=m.layers?burgerSVG(m.layers,m.id.length*13+7).html:m.svg());
+const art=m=>artCache[m.id]||(artCache[m.id]=m.layers?burgerSVG(m.layers,m.id.length*13+7,0,'',true).html:m.svg());
 /* Foto real quando o item tem "foto"; se o arquivo faltar, volta para a ilustração */
 const safeSrc=u=>/^(fotos\/[\w.-]+\.(jpe?g|png|webp|avif)|data:image\/(jpeg|png|webp|avif);base64,[A-Za-z0-9+\/=]+)$/i.test(u||'')?u:'';
 const picHTML=m=>{const src=safeSrc(m.foto);if(!src)return art(m);
