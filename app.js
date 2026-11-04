@@ -126,7 +126,7 @@ function burgerSVG(layers,seed=1,spread=0,cls='',board=false){
     out+=`<g class="layer" style="--i:${i}" data-i="${i}">${i?`<ellipse cx="150" cy="${y+2}" rx="138" ry="4.5" fill="#1A0A04" opacity=".42" filter="url(#fBlurS)"/>`:''}${L.d(y,R)}</g>`;
     y-=L.h-OV});
   const extra=(n-1)*spread,vb=`-14 ${-extra/2} 328 ${H+extra}`;
-  const ground=board?`<ellipse cx="150" cy="${H-10}" rx="170" ry="15" fill="#000" opacity=".6" filter="url(#fBlur)"/><ellipse cx="150" cy="${H-17}" rx="164" ry="14" fill="url(#gSlate)"/><ellipse cx="150" cy="${H-18.5}" rx="160" ry="12" fill="none" stroke="#fff" stroke-opacity=".1" stroke-width="1.2"/><ellipse cx="150" cy="${H-22}" rx="140" ry="7" fill="#000" opacity=".55" filter="url(#fBlurS)"/>`
+  const ground=board?`<ellipse cx="150" cy="${H-10}" rx="170" ry="15" fill="#5A3414" opacity=".35" filter="url(#fBlur)"/><ellipse cx="150" cy="${H-17}" rx="164" ry="14" fill="url(#gBoard)"/><ellipse cx="150" cy="${H-18.5}" rx="160" ry="12" fill="none" stroke="#fff" stroke-opacity=".1" stroke-width="1.2"/><ellipse cx="150" cy="${H-22}" rx="140" ry="7" fill="#000" opacity=".55" filter="url(#fBlurS)"/>`
     :`<ellipse cx="150" cy="${H-16}" rx="150" ry="10" fill="#000" opacity=".5" filter="url(#fBlur)"/>`;
   return {html:`<svg class="burger ${cls}" viewBox="${vb}" aria-hidden="true">${ground}${out}</svg>`,H,centers,extra};
 }
@@ -353,6 +353,17 @@ const toImg=(svg,cls='')=>{const ids=[...new Set([...svg.matchAll(/url\(#([\w-]+
   const full=svg.replace(/^<svg /,'<svg xmlns="http://www.w3.org/2000/svg" ').replace(/(<svg[^>]*>)/,'$1<defs>'+defs+'</defs>');
   return `<img class="art ${cls}" src="data:image/svg+xml;charset=utf-8,${encodeURIComponent(full)}" alt="" decoding="async">`};
 const art=m=>artCache[m.id]||(artCache[m.id]=toImg(m.layers?burgerSVG(m.layers,m.id.length*13+7,0,'',true).html:m.svg(),m.layers?'burger':'side'));
+/* Converte os desenhos em imagem rasterizada (WebP/PNG), como uma foto:
+   o modo escuro forçado do celular escurece desenhos vetoriais, mas não fotos. */
+const rasterCache=new Map(),webpOK=(()=>{try{return document.createElement('canvas').toDataURL('image/webp').startsWith('data:image/webp')}catch(e){return false}})();
+function rasterize(img){const src=img.getAttribute('src');if(!src||!src.startsWith('data:image/svg'))return;
+  if(rasterCache.has(src)){const r=rasterCache.get(src);if(typeof r==='string')img.src=r;else r.then(u=>{if(u)img.src=u});return}
+  const job=new Promise(res=>{const im=new Image();im.decoding='async';im.onload=()=>{try{
+      const w=640,h=Math.round(w*(im.naturalHeight||im.height)/(im.naturalWidth||im.width||1))||480,c=document.createElement('canvas');c.width=w;c.height=h;
+      c.getContext('2d').drawImage(im,0,0,w,h);const u=c.toDataURL(webpOK?'image/webp':'image/png',.9);rasterCache.set(src,u);res(u)}catch(e){rasterCache.set(src,'');res('')}};
+    im.onerror=()=>{rasterCache.set(src,'');res('')};im.src=src});
+  rasterCache.set(src,job);job.then(u=>{if(u)img.src=u})}
+const rasterizeIn=root=>{const run=()=>root.querySelectorAll('img.art').forEach(rasterize);('requestIdleCallback' in window)?requestIdleCallback(run,{timeout:800}):setTimeout(run,60)};
 /* Foto real quando o item tem "foto"; se o arquivo faltar, volta para a ilustração */
 const safeSrc=u=>/^(fotos\/[\w.-]+\.(jpe?g|png|webp|avif)|data:image\/(jpeg|png|webp|avif);base64,[A-Za-z0-9+\/=]+)$/i.test(u||'')?u:'';
 const picHTML=m=>{const src=safeSrc(m.foto);if(!src)return art(m);
@@ -435,7 +446,7 @@ function renderMenu(animate){
   grid.innerHTML=CATS.map(([c,label])=>{const its=pool.filter(m=>m.cat===c);if(!its.length)return '';
     return `<section class="cat-group" id="cat-${c}" data-cat="${c}" aria-label="${label}"><h3 class="cat-title">${label} <small>${its.length}</small></h3><div class="grid">${its.map(cardHTML).join('')}</div></section>`}).join('');
   if(animate&&!reduce)$$('#grid .card').forEach((c,i)=>{if(c.getBoundingClientRect().top<innerHeight){c.style.setProperty('--n',i%6);c.classList.add('enter')}});
-  watchCards();spyMenu(true);
+  watchCards();spyMenu(true);rasterizeIn(grid);
 }
 function updateRows(){const f=document.activeElement,row=f&&f.closest&&f.closest('[data-row]'),fid=row&&row.dataset.row,fstep=f&&f.dataset&&f.dataset.step;
   $$('[data-row]').forEach(r=>{const m=byId[r.dataset.row];if(m)r.innerHTML=rowHTML(m)});
@@ -485,7 +496,7 @@ grid.addEventListener('click',e=>{
   const pic=b.closest('.card').querySelector('.pic');updateRows();
   if(reduce||!pic||!pic.animate){land();toast(`<i>+1</i> ${item(key).name}`);return}
   const a=pic.getBoundingClientRect(),z=cartBtn.getBoundingClientRect();
-  const fl=document.createElement('div');fl.className='flyer';fl.innerHTML=art(byId[id]);document.body.appendChild(fl);
+  const fl=document.createElement('div');fl.className='flyer';fl.innerHTML=art(byId[id]);fl.querySelectorAll('img.art').forEach(rasterize);document.body.appendChild(fl);
   const sx=a.left+a.width/2-45,sy=a.top+a.height/2-45,ex=z.left+z.width/2-45,ey=z.top+z.height/2-45;
   fl.animate([{transform:`translate(${sx}px,${sy}px) scale(1.2)`,opacity:1},{transform:`translate(${(sx+ex)/2}px,${Math.min(sy,ey)-120}px) scale(.8) rotate(-20deg)`,opacity:1,offset:.5},{transform:`translate(${ex}px,${ey}px) scale(.2) rotate(-40deg)`,opacity:.3}],{duration:850,easing:'cubic-bezier(.5,0,.3,1)'}).onfinish=()=>{fl.remove();land()};
   toast(`<i>+1</i> ${item(key).name}`);
@@ -606,7 +617,7 @@ sync(false);
 /* Drawer */
 const drawer=$('#drawer'),scrim=$('#scrim');let lastFocus=null;drawer.inert=true;
 const behind=()=>['#hdr','main','#contato','#mbar'].map(q=>$(q)).filter(Boolean);
-const openCart=()=>{lastFocus=document.activeElement;renderTicket();drawer.inert=false;behind().forEach(el=>el.inert=true);drawer.classList.add('open');updateMbar();scrim.classList.add('show');$('#closeCart').focus()};
+const openCart=()=>{lastFocus=document.activeElement;renderTicket();rasterizeIn(ticket);drawer.inert=false;behind().forEach(el=>el.inert=true);drawer.classList.add('open');updateMbar();scrim.classList.add('show');$('#closeCart').focus()};
 const closeCart=()=>{drawer.inert=true;behind().forEach(el=>el.inert=false);drawer.classList.remove('open');updateMbar();scrim.classList.remove('show');lastFocus&&lastFocus.focus()};
 cartBtn.addEventListener('click',openCart);$('#mbar').addEventListener('click',openCart);$('#closeCart').addEventListener('click',closeCart);scrim.addEventListener('click',closeCart);
 document.addEventListener('keydown',e=>{if(e.key==='Escape'&&drawer.classList.contains('open'))closeCart()});

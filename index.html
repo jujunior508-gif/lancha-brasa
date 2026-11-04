@@ -37,7 +37,7 @@
   --bg:#FAF7F3; --surface:#FFFFFF; --surface-2:#F3ECE5; --ink:#1F1512; --muted:#6B5B54; --line:#E6DBD2;
   --ember:#B5421A; --ember-ink:#FFFFFF; --gold:#E8A63A; --herb:#4C7A2A;
   --char:#17110E; --char-2:#211814; --char-3:#2C211C; --on-char:#F6EDE6; --on-char-muted:#BCA79C;
-  --studio:radial-gradient(6px 6px at 18% 16%,rgba(255,200,130,.5),transparent),radial-gradient(10px 10px at 80% 12%,rgba(255,170,90,.35),transparent),radial-gradient(14px 14px at 70% 30%,rgba(255,215,160,.18),transparent),radial-gradient(8px 8px at 30% 34%,rgba(255,185,110,.22),transparent),radial-gradient(55% 45% at 50% 34%,rgba(255,170,90,.22),transparent 72%),linear-gradient(#2E211B,#1A120E 62%,#120C09);
+  --studio:radial-gradient(70% 55% at 50% 30%,#FFF8EC 0%,#F6E6CF 55%,#EBD3B3 100%);
   --shadow:0 1px 2px rgba(31,21,18,.06),0 22px 40px -22px rgba(31,21,18,.45);
   --f-display:"Big Shoulders Display","Arial Narrow",Impact,system-ui,sans-serif;
   --f-body:"Figtree",system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;
@@ -212,9 +212,9 @@ button{font:inherit;cursor:pointer;color:inherit}
 .card.enter{animation:cardIn .7s cubic-bezier(.2,.9,.2,1) backwards;animation-delay:calc(var(--n) * 70ms)}
 @keyframes cardIn{from{opacity:0;transform:translateY(40px) scale(.96)}}
 .pic{position:relative;aspect-ratio:5/4;max-width:100%;background:var(--studio);display:grid;place-items:center;overflow:hidden}
-.pic:not(.has-photo)::before{content:"";position:absolute;left:0;right:0;bottom:0;height:30%;background:repeating-linear-gradient(178deg,rgba(255,220,180,.035) 0 2px,transparent 2px 9px),linear-gradient(#3B281C,#21160F);border-top:1px solid rgba(255,200,150,.14);box-shadow:inset 0 14px 22px -14px rgba(0,0,0,.8)}
+.pic:not(.has-photo)::before{content:"";position:absolute;left:0;right:0;bottom:0;height:30%;background:repeating-linear-gradient(178deg,rgba(120,70,30,.07) 0 2px,transparent 2px 9px),linear-gradient(#D9B489,#C59A6A);border-top:1px solid rgba(255,255,255,.55);box-shadow:inset 0 12px 18px -12px rgba(90,50,20,.35)}
 .pic svg,.pic img.art{position:relative;z-index:1}
-.pic::after{content:"";position:absolute;inset:0;background:radial-gradient(60% 40% at 50% 0%,rgba(255,214,160,.16),transparent 70%);pointer-events:none}
+.pic::after{content:"";position:absolute;inset:0;background:radial-gradient(60% 40% at 50% 0%,rgba(255,255,255,.45),transparent 70%);pointer-events:none}
 .pic .photo{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;transition:transform .8s cubic-bezier(.2,.8,.2,1),filter .4s}
 .pic.has-photo::after{background:linear-gradient(to top,rgba(10,6,4,.45),transparent 40%),radial-gradient(60% 40% at 50% 0%,rgba(255,214,160,.12),transparent 70%)}
 .card:hover .pic .photo{transform:scale(1.07);filter:saturate(1.08) contrast(1.03)}
@@ -228,7 +228,7 @@ button{font:inherit;cursor:pointer;color:inherit}
 .badge{position:absolute;z-index:2;top:14px;left:14px;font-family:var(--f-mono);font-size:.68rem;letter-spacing:.1em;text-transform:uppercase;font-weight:600;background:var(--gold);color:#1A0F08;padding:5px 11px;border-radius:999px}
 .badge.veg{background:#7FB84A}
 .badge.hot{background:#E2471B;color:#fff}
-.kcal{position:absolute;z-index:2;top:14px;right:14px;font-family:var(--f-mono);font-size:.68rem;color:rgba(246,237,230,.75);letter-spacing:.06em}
+.kcal{position:absolute;z-index:2;top:14px;right:14px;font-family:var(--f-mono);font-size:.68rem;color:#6B4E3A;letter-spacing:.06em}
 .body{padding:22px 22px 22px;display:flex;flex-direction:column;gap:10px;flex:1;min-width:0}
 .title-row{display:flex;justify-content:space-between;align-items:baseline;gap:12px}
 .card h3{font-size:1.75rem;line-height:.95}
