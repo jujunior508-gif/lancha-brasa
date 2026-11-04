@@ -1,6 +1,6 @@
 # Fotos do cardápio
 
-Coloque aqui as fotos dos lanches. Depois, no `index.html`, adicione `foto:'fotos/NOME-DO-ARQUIVO.jpg'` no item correspondente (procure por `COMO EDITAR O CARDÁPIO`).
+Coloque aqui as fotos dos lanches. Depois adicione, no `app.js`, `foto:'fotos/NOME-DO-ARQUIVO.jpg'` no item correspondente (procure por `COMO EDITAR O CARDÁPIO`).
 
 Exemplo, para o Brasa Clássico:
 

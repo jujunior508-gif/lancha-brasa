@@ -15,11 +15,11 @@ Landing page de uma hamburgueria artesanal em Pinheiros, São Paulo.
 
 ## Dados da loja (WhatsApp, telefone, redes sociais)
 
-No `index.html`, procure por `DADOS DA LOJA`. Ali ficam o WhatsApp (só dígitos, com 55 e DDD), o telefone, o e-mail e os endereços do Instagram, Facebook e TikTok. Rede social em branco esconde o ícone.
+No `app.js`, procure por `DADOS DA LOJA`. Ali ficam o WhatsApp (só dígitos, com 55 e DDD), o telefone, o e-mail e os endereços do Instagram, Facebook e TikTok. Rede social em branco esconde o ícone.
 
 ## Como editar o cardápio
 
-No `index.html`, procure por `COMO EDITAR O CARDÁPIO`. Logo abaixo está a lista de itens (`const MENU=[`). Cada item é um bloco `{ ... }`:
+No `app.js`, procure por `COMO EDITAR O CARDÁPIO`. Logo abaixo está a lista de itens (`const MENU=[`). Cada item é um bloco `{ ... }`:
 
 - **Preço:** `price:36.9` (com ponto, sem "R$")
 - **Nome e descrição:** `name:'...'` e `desc:'...'`
@@ -29,11 +29,11 @@ No `index.html`, procure por `COMO EDITAR O CARDÁPIO`. Logo abaixo está a list
 - **Novo item:** copie um bloco parecido e troque o `id`
 - **Foto real:** coloque o arquivo na pasta `fotos/` e acrescente `foto:'fotos/nome.jpg'` no item (veja `fotos/LEIA-ME.md`)
 
-Os ingredientes do "Monte o seu" ficam logo abaixo, em `const ING=[`: dá para mudar o preço (`p`), as calorias (`c`) e a quantidade máxima (`max`) de cada um.
+Os ingredientes do "Monte o seu" ficam no `app.js`, em `const ING=[`: dá para mudar o preço (`p`), as calorias (`c`) e a quantidade máxima (`max`) de cada um.
 
 ## Avaliações
 
-A seção de avaliações só aparece quando houver avaliações reais. No `index.html`, procure por `AVALIAÇÕES` e coloque as avaliações dos clientes (Google, iFood, Instagram), com autorização deles.
+A seção de avaliações só aparece quando houver avaliações reais. No `app.js`, procure por `AVALIAÇÕES` e coloque as avaliações dos clientes (Google, iFood, Instagram), com autorização deles.
 
 ## Prévia nas redes sociais
 
@@ -41,10 +41,9 @@ O arquivo `og.jpg` é a imagem que aparece quando alguém compartilha o link. El
 
 ## Segurança
 
-- Página 100% estática: não há servidor, banco de dados nem coleta de dados. O pedido sai direto do navegador do cliente para o WhatsApp.
-- Content Security Policy bloqueia scripts e conexões externas; só as fontes do Google Fonts são carregadas.
-- Os textos digitados pelo cliente são limpos e têm limite de tamanho antes de entrar na mensagem do WhatsApp.
-- Links externos usam `rel="noopener noreferrer"`.
+Site estático, sem servidor nem banco de dados. A CSP aceita só scripts do próprio site (`app.js`), sem nada colado no HTML, e bloqueia conexões externas. Tudo o que o cliente digita é tratado como texto. Detalhes, como relatar falhas e as configurações recomendadas do GitHub (HTTPS, 2FA, secret scanning) estão em [SECURITY.md](SECURITY.md).
+
+**Arquivos:** `index.html` (página), `app.js` (comportamento), `fotos/` (fotos dos lanches), `og.jpg` (prévia nas redes).
 
 ## Como abrir
 
