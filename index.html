@@ -5,19 +5,30 @@
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <meta http-equiv="Content-Security-Policy" content="default-src 'none'; script-src 'unsafe-inline'; style-src 'unsafe-inline' https://fonts.googleapis.com; font-src https://fonts.gstatic.com; img-src data:; connect-src 'none'; object-src 'none'; base-uri 'none'; form-action 'none'">
 <meta name="referrer" content="strict-origin-when-cross-origin">
-<meta http-equiv="X-Content-Type-Options" content="nosniff">
-<meta name="description" content="Brasa & Pão: hamburgueria artesanal em Pinheiros, São Paulo. Blend moído todo dia, brioche da casa e pedidos pelo WhatsApp.">
+<meta name="description" content="Brasa & Pão: hamburgueria artesanal em Pinheiros, São Paulo. Blend moído todo dia, brioche da casa, monte seu lanche e peça pelo WhatsApp.">
 <meta name="theme-color" content="#17110E">
+<meta property="og:type" content="restaurant">
+<meta property="og:locale" content="pt_BR">
+<meta property="og:site_name" content="Brasa & Pão">
+<meta property="og:title" content="Brasa & Pão Hamburgueria · Pinheiros, SP">
+<meta property="og:description" content="Blend moído todo dia, brioche da casa e pedido direto pelo WhatsApp. Monte seu lanche do seu jeito.">
+<meta name="twitter:card" content="summary">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 48 48'%3E%3Ccircle cx='24' cy='24' r='23' fill='%23CF4E1A'/%3E%3Cpath d='M24 7c3 6 9 9 9 17a9 9 0 0 1-18 0c0-4 2-6 4-8 0 3 1 5 3 5-1-5 0-10 2-14z' fill='%23E8A63A'/%3E%3C/svg%3E">
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"Restaurant","name":"Brasa & Pão Hamburgueria","servesCuisine":["Hambúrguer","Lanches"],"priceRange":"R$ 15–50","telephone":"+55 11 3062-1240","address":{"@type":"PostalAddress","streetAddress":"Rua dos Pinheiros, 1240","addressLocality":"São Paulo","addressRegion":"SP","postalCode":"05422-001","addressCountry":"BR"},"openingHoursSpecification":[{"@type":"OpeningHoursSpecification","dayOfWeek":["Tuesday","Wednesday","Thursday"],"opens":"11:30","closes":"23:00"},{"@type":"OpeningHoursSpecification","dayOfWeek":["Friday","Saturday"],"opens":"11:30","closes":"23:59"},{"@type":"OpeningHoursSpecification","dayOfWeek":"Sunday","opens":"12:00","closes":"22:00"}],"hasMenu":"#cardapio","acceptsReservations":false}
+</script>
 <title>Brasa &amp; Pão Hamburgueria</title>
 <meta name="claude:viewport-fit-sides" content="cover">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Big+Shoulders+Display:wght@700;800;900&family=Figtree:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500;600&display=swap">
+<link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Big+Shoulders+Display:wght@700;800;900&family=Figtree:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500;600&display=swap">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Big+Shoulders+Display:wght@700;800;900&family=Figtree:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500;600&display=swap" media="print" onload="this.media='all'">
+<noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Big+Shoulders+Display:wght@700;800;900&family=Figtree:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500;600&display=swap"></noscript>
 <style>
 /* Layout: espresso "grill" bands (hero, anatomia, rodapé) alternate with clean counter-top sections; product shots sit on a dark studio backdrop. */
 :root{
   --bg:#FAF7F3; --surface:#FFFFFF; --surface-2:#F3ECE5; --ink:#1F1512; --muted:#6B5B54; --line:#E6DBD2;
-  --ember:#CF4E1A; --ember-ink:#FFFFFF; --gold:#E8A63A; --herb:#4C7A2A;
+  --ember:#B5421A; --ember-ink:#FFFFFF; --gold:#E8A63A; --herb:#4C7A2A;
   --char:#17110E; --char-2:#211814; --char-3:#2C211C; --on-char:#F6EDE6; --on-char-muted:#BCA79C;
   --studio:radial-gradient(120% 95% at 50% 28%,#40302A 0%,#231915 55%,#140E0B 100%);
   --shadow:0 1px 2px rgba(31,21,18,.06),0 22px 40px -22px rgba(31,21,18,.45);
@@ -104,7 +115,8 @@ button{font:inherit;cursor:pointer;color:inherit}
 .hero h1 .ln:nth-child(3) > span{animation-delay:.24s}
 @keyframes lineUp{from{transform:translateY(105%)}}
 .hero h1 .outline{color:transparent;-webkit-text-stroke:2px var(--on-char)}
-.fade-up{animation:fadeUp .9s cubic-bezier(.2,.9,.2,1) backwards;animation-delay:var(--d,.4s)}
+.fade-up{animation:slideUp .9s cubic-bezier(.2,.9,.2,1) backwards;animation-delay:var(--d,.4s)}
+@keyframes slideUp{from{transform:translateY(22px)}}
 @keyframes fadeUp{from{opacity:0;transform:translateY(22px)}}
 .lede{max-width:33em;margin-top:24px;font-size:1.15rem;color:var(--on-char-muted)}
 .cta-row{display:flex;flex-wrap:wrap;gap:12px;margin-top:32px}
@@ -126,6 +138,7 @@ button{font:inherit;cursor:pointer;color:inherit}
 .float{animation:bob 5s ease-in-out 2.4s infinite}
 @keyframes bob{50%{transform:translateY(-10px)}}
 .stage svg.burger{width:100%;height:auto;overflow:visible;display:block}
+#heroBurger{aspect-ratio:328/221;width:100%}
 .assemble .layer{animation:drop .8s cubic-bezier(.22,1.45,.5,1) backwards;animation-delay:calc(var(--i) * 120ms + 350ms)}
 @keyframes drop{from{transform:translateY(-320px);opacity:0}55%{opacity:1}}
 .steam{position:absolute;left:50%;top:-6%;width:46%;transform:translateX(-50%);overflow:visible;pointer-events:none}
@@ -570,6 +583,7 @@ button{font:inherit;cursor:pointer;color:inherit}
 @media (max-width:900px){.b-grid{grid-template-columns:minmax(0,1fr)}.b-stage{min-height:0;height:250px;padding:30px 20px 28px;z-index:5;border-radius:22px;box-shadow:0 18px 30px -18px rgba(0,0,0,.6)}.b-burger svg{max-height:200px}.b-plate{bottom:20px}.b-stage::before{width:200px;top:50%}}
 @media (max-width:620px){.b-ings{grid-template-columns:repeat(3,minmax(0,1fr));gap:9px}.b-card{padding:16px;border-radius:18px}.b-presets{flex-wrap:nowrap;overflow-x:auto;scrollbar-width:none}.b-presets::-webkit-scrollbar{display:none}.b-pre{flex:none}.b-stage{height:220px}.b-burger svg{max-height:175px}}
 
+
 /* Scroll reveal: always visible at rest; animates only when it scrolls into view */
 .reveal.in{animation:rise .9s cubic-bezier(.2,.9,.2,1) both;animation-delay:var(--d,0s)}
 @keyframes rise{from{opacity:0;transform:translateY(44px)}}
@@ -645,9 +659,9 @@ button{font:inherit;cursor:pointer;color:inherit}
       <a href="#sobre">Sobre Nós</a>
       <a href="#contato">Contato</a>
     </nav>
-    <button class="cart-btn" id="openCart" aria-label="Abrir pedido">
+    <button class="cart-btn" id="openCart">
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 8h14l-1.2 12H6.2z"/><path d="M9 8a3 3 0 0 1 6 0"/></svg>
-      <span class="cart-label">Pedido</span><span class="count" id="count">0</span>
+      <span class="cart-label">Pedido</span><span class="count" id="count">0</span><span class="sr"> itens no pedido, abrir carrinho</span>
     </button>
     <button class="menu-toggle" id="menuToggle" aria-label="Abrir navegação" aria-expanded="false" aria-controls="nav"><span></span></button>
   </div>
@@ -894,7 +908,7 @@ button{font:inherit;cursor:pointer;color:inherit}
 </footer>
 
 <div class="scrim" id="scrim"></div>
-<aside class="drawer" id="drawer" role="dialog" aria-modal="true" aria-labelledby="drawerTitle" aria-hidden="true">
+<div class="drawer" id="drawer" role="dialog" aria-modal="true" aria-labelledby="drawerTitle">
   <div class="drawer-head">
     <h2 id="drawerTitle">Seu pedido</h2>
     <button class="x" id="closeCart" aria-label="Fechar pedido"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18"/></svg></button>
@@ -916,7 +930,7 @@ button{font:inherit;cursor:pointer;color:inherit}
     <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2a10 10 0 0 0-8.6 15.1L2 22l5-1.3A10 10 0 1 0 12 2zm0 18.2c-1.6 0-3.1-.4-4.4-1.2l-.3-.2-3 .8.8-2.9-.2-.3A8.2 8.2 0 1 1 12 20.2zm4.5-6.1c-.2-.1-1.5-.7-1.7-.8-.2-.1-.4-.1-.6.1l-.8 1c-.1.2-.3.2-.5.1-.7-.3-1.4-.7-2-1.3-.5-.5-1-1.1-1.3-1.7-.1-.2 0-.4.1-.5l.4-.5.3-.5v-.5l-.8-1.9c-.2-.5-.4-.4-.6-.4h-.5c-.2 0-.5.1-.7.3-.7.7-1 1.6-1 2.5.1 1.1.5 2.1 1.2 3 1.2 1.8 2.8 3.2 4.8 4 .5.2 1 .4 1.5.5.6.2 1.2.2 1.8.1.7-.1 1.4-.6 1.8-1.2.2-.4.2-.8.2-1.2l-.6-.4z"/></svg>
     Pedir pelo WhatsApp</a>
   <p class="wa-note">O pedido é enviado pelo WhatsApp da loja, que confirma o tempo e o pagamento com você.</p>
-</aside>
+</div>
 
 <button class="mbar" id="mbar" type="button" hidden><span class="mbar-count" id="mbarCount">0</span><span>Ver pedido</span><b id="mbarTotal">R$ 0,00</b></button>
 
@@ -1002,8 +1016,8 @@ function bunTop(y,R){
   const h=84,t=y-h;let s=`<path d="M10 ${y}C2 ${y-h*.45} 40 ${t+4} 150 ${t}C260 ${t+4} 298 ${y-h*.45} 290 ${y}Q150 ${y+7} 10 ${y}Z" fill="url(#gBunTop)"/>`;
   s+=`<path d="M12 ${y-1}Q150 ${y+6} 288 ${y-1}Q150 ${y+11} 12 ${y-1}Z" fill="#F2D3A0"/>`;
   s+=`<ellipse cx="108" cy="${t+h*.27}" rx="72" ry="22" fill="url(#gShine)" transform="rotate(-8 108 ${t+h*.27})"/>`;
-  for(let i=0;i<34;i++){const x=34+R()*232,fx=1-Math.pow((x-150)/140,2),yy=y-12-R()*(h*fx-22),r=f1((R()-.5)*80);
-    s+=`<g transform="rotate(${r} ${f1(x)} ${f1(yy)})"><ellipse cx="${f1(x+.6)}" cy="${f1(yy+1.4)}" rx="4.8" ry="2.2" fill="#6A2E0A" opacity=".35"/><ellipse cx="${f1(x)}" cy="${f1(yy)}" rx="4.6" ry="2.1" fill="url(#gSeed)"/></g>`}
+  for(let i=0;i<24;i++){const x=34+R()*232,fx=1-Math.pow((x-150)/140,2),yy=y-12-R()*(h*fx-22),r=f1((R()-.5)*80);
+    s+=`<ellipse cx="${f1(x)}" cy="${f1(yy)}" rx="4.8" ry="2.2" fill="url(#gSeed)" stroke="#8A4512" stroke-opacity=".35" stroke-width=".8" transform="rotate(${r} ${f1(x)} ${f1(yy)})"/>`}
   return s;
 }
 const LAYERS={
@@ -1259,7 +1273,7 @@ const art=m=>artCache[m.id]||(artCache[m.id]=m.layers?burgerSVG(m.layers,m.id.le
 /* ---------- Hero burger ---------- */
 const heroLayers=['bunBottom','sauce','lettuce','tomato','patty','cheese','bacon','pickles','onion','bunTop'];
 const hero=$('#heroBurger');
-function stackHero(){hero.innerHTML=burgerSVG(heroLayers,42,0,reduce?'':'assemble').html}
+function stackHero(){const b=burgerSVG(heroLayers,42,0,reduce?'':'assemble');hero.style.aspectRatio=`328/${b.H}`;hero.innerHTML=b.html}
 stackHero();
 $('#restack').addEventListener('click',stackHero);
 const stageInner=$('#stageInner');
@@ -1289,14 +1303,14 @@ function embers(cv){
   addEventListener('resize',size);
   new IntersectionObserver(([e])=>{if(e.isIntersecting&&!running){running=true;tick()}else if(!e.isIntersecting){running=false;cancelAnimationFrame(raf)}}).observe(cv);
 }
-if(!reduce)$$('canvas.embers').forEach(embers);
+if(!reduce){const go=()=>$$('canvas.embers').forEach(embers);('requestIdleCallback' in window)?requestIdleCallback(go,{timeout:1500}):setTimeout(go,600)}
 
 /* ---------- Flames in CTA ---------- */
 $('#flames').innerHTML=Array.from({length:14},(_,i)=>{const h=60+Math.abs(Math.sin(i*1.7))*80;return `<span class="flame" style="--h:${h.toFixed(0)}px;--t:${(.5+((i*37)%10)/14).toFixed(2)}s"></span>`}).join('');
 
 /* ---------- Cart state ---------- */
 let cart={},mode='retirada',placed=null;
-try{const s=JSON.parse(localStorage.getItem('bp-cart')||'{}');if(s&&typeof s==='object')for(const k in s)if(item(k)&&s[k]>0)cart[k]=Math.min(99,s[k]|0)}catch(e){}
+try{const s=JSON.parse(localStorage.getItem('bp-cart')||'{}');if(s&&typeof s==='object')for(const k in s){const q=Math.min(99,Math.floor(+s[k]||0));if(item(k)&&q>0)cart[k]=q}}catch(e){}
 try{const m=localStorage.getItem('bp-mode');if(m==='entrega'||m==='retirada')mode=m}catch(e){}
 const save=()=>{try{localStorage.setItem('bp-cart',JSON.stringify(cart));localStorage.setItem('bp-mode',mode)}catch(e){}};
 const qtyTotal=()=>Object.values(cart).reduce((a,b)=>a+b,0);
@@ -1305,13 +1319,12 @@ const inCart=id=>(cart[id]||0)+(cart[id+'|combo']||0);
 const FEE=7.9,FREE_AT=120;
 
 /* ---------- Menu render: lista por categoria + barra fixa ---------- */
-const grid=$('#grid'),tabInd=$('#tabInd'),tabsEl=$('#tabs'),menuNav=$('#menuNav');let query='',activeCat='burgers';const activeTags=new Set(),comboOn=new Set();
+const grid=$('#grid'),tabInd=$('#tabInd'),tabsEl=$('#tabs'),menuNav=$('#menuNav');let query='',activeCat='burgers';const comboOn=new Set();
 const CATS=[['burgers','Burgers'],['sides','Porções'],['drinks','Bebidas'],['desserts','Sobremesas']];
-const matches=m=>{if(activeTags.size&&![...activeTags].every(t=>m.tags.includes(t)))return false;
-  if(!query)return true;return norm([m.name,m.desc,m.spec,m.notes.join(' '),m.badge||''].join(' ')).includes(query)};
+const matches=m=>{if(!query)return true;return norm([m.name,m.desc,m.spec,m.notes.join(' '),m.badge||''].join(' ')).includes(query)};
 const keyFor=id=>comboOn.has(id)?id+'|combo':id;
 function rowHTML(m){const k=keyFor(m.id),q=cart[k]||0,price=item(k).price;
-  if(!q)return `<button class="add" data-add="${m.id}" aria-label="Adicionar ${m.name} ao pedido"><svg class="ico" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" aria-hidden="true"><path d="M12 5v14M5 12h14"/></svg><span>Adicionar</span><b class="add-price">${money(price)}</b></button>`;
+  if(!q)return `<button class="add" data-add="${m.id}"><svg class="ico" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" aria-hidden="true"><path d="M12 5v14M5 12h14"/></svg><span>Adicionar</span><b class="add-price">${money(price)}</b><span class="sr"> ${m.name}</span></button>`;
   return `<div class="stepper" role="group" aria-label="Quantidade de ${m.name}"><button data-step="-1" data-id="${m.id}" aria-label="Tirar um">${q===1?'<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" aria-hidden="true"><path d="M5 7h14M10 7V4h4v3M7 7l1 13h8l1-13"/></svg>':'−'}</button><span class="q" aria-live="polite">${q}</span><button data-step="1" data-id="${m.id}" aria-label="Pôr mais um">+</button></div><b class="row-total">${money(price*q)}</b>`}
 function cardHTML(m,n){return `
     <article class="card${comboOn.has(m.id)?' expanded':''}" style="--n:${n%3}" data-card="${m.id}">
@@ -1327,28 +1340,32 @@ function cardHTML(m,n){return `
       </div>
     </article>`}
 function renderMenu(animate){
-  const pool=MENU.filter(matches),filtered=query||activeTags.size;
+  const pool=MENU.filter(matches),filtered=!!query;
   $$('.tab').forEach(t=>{const n=pool.filter(m=>m.cat===t.dataset.cat).length;t.querySelector('small').textContent=n;t.disabled=!n});
   $('#resultCount').textContent=filtered?`${pool.length} ${pool.length===1?'item encontrado':'itens encontrados'}${query?` para “${$('#menuSearch').value.trim()}”`:''}`:`${pool.length} itens no cardápio`;
   if(!pool.length){grid.innerHTML=`<div class="no-results"><b>Nada por aqui</b><p>Nenhum item combina com a busca.</p><button id="clearFilters">Limpar busca</button></div>`;
-    $('#clearFilters').onclick=()=>{query='';$('#menuSearch').value='';activeTags.clear();$$('.chip').forEach(c=>c.setAttribute('aria-pressed','false'));renderMenu(true)};return}
+    $('#clearFilters').onclick=()=>{query='';$('#menuSearch').value='';renderMenu(true)};return}
   grid.innerHTML=CATS.map(([c,label])=>{const its=pool.filter(m=>m.cat===c);if(!its.length)return '';
     return `<section class="cat-group" id="cat-${c}" data-cat="${c}" aria-label="${label}"><h3 class="cat-title">${label} <small>${its.length}</small></h3><div class="grid">${its.map(cardHTML).join('')}</div></section>`}).join('');
   if(animate&&!reduce)$$('#grid .card').forEach((c,i)=>{if(c.getBoundingClientRect().top<innerHeight){c.style.setProperty('--n',i%6);c.classList.add('enter')}});
   watchCards();spyMenu(true);
 }
-function updateRows(){$$('[data-row]').forEach(r=>{const m=byId[r.dataset.row];if(m)r.innerHTML=rowHTML(m)})}
+function updateRows(){const f=document.activeElement,row=f&&f.closest&&f.closest('[data-row]'),fid=row&&row.dataset.row,fstep=f&&f.dataset&&f.dataset.step;
+  $$('[data-row]').forEach(r=>{const m=byId[r.dataset.row];if(m)r.innerHTML=rowHTML(m)});
+  if(fid){const r=$(`[data-row="${fid}"]`);const t=r&&(r.querySelector(`[data-step="${fstep||1}"]`)||r.querySelector('[data-step="1"]')||r.querySelector('[data-add]'));t&&t.focus({preventScroll:true})}}
 function moveInd(){const t=$('.tab[aria-current="true"]');if(!t)return;tabInd.style.width=t.offsetWidth+'px';tabInd.style.transform=`translateX(${t.offsetLeft}px)`}
 function setActive(cat,scrollTab){if(cat===activeCat&&!scrollTab)return;activeCat=cat;
   $$('.tab').forEach(x=>x.setAttribute('aria-current',x.dataset.cat===cat));moveInd();
   const t=$(`.tab[data-cat="${cat}"]`);if(t&&tabsEl.scrollWidth>tabsEl.clientWidth)tabsEl.scrollTo({left:t.offsetLeft-16,behavior:reduce?'auto':'smooth'})}
 const navOffset=()=>(parseFloat(getComputedStyle(document.documentElement).getPropertyValue('--hdr'))||68)+menuNav.offsetHeight+8;
-function spyMenu(force){const groups=$$('.cat-group');if(!groups.length)return;let cur=groups[0].dataset.cat;
-  groups.forEach(g=>{if(g.getBoundingClientRect().top<=navOffset()+40)cur=g.dataset.cat});
-  const r=grid.getBoundingClientRect();menuNav.classList.toggle('stuck',r.top<navOffset()&&r.bottom>navOffset());
+let spyLockUntil=0;
+function spyMenu(force){const groups=$$('.cat-group');if(!groups.length)return;const off=navOffset();
+  const r=grid.getBoundingClientRect();menuNav.classList.toggle('stuck',r.top<off&&r.bottom>off);
+  if(!force&&Date.now()<spyLockUntil)return;
+  let cur=groups[0].dataset.cat;for(const g of groups){if(g.getBoundingClientRect().top<=off+40)cur=g.dataset.cat;else break}
   if(force||cur!==activeCat)setActive(cur,true)}
 $$('.tab').forEach(t=>t.addEventListener('click',()=>{const g=$('#cat-'+t.dataset.cat);if(!g)return;
-  setActive(t.dataset.cat,true);scrollTo({top:g.getBoundingClientRect().top+scrollY-navOffset()+4,behavior:reduce?'auto':'smooth'})}));
+  setActive(t.dataset.cat,true);if(!reduce){spyLockUntil=Infinity;const release=()=>{spyLockUntil=Date.now()+150;removeEventListener('scrollend',release)};addEventListener('scrollend',release);setTimeout(release,1600)}scrollTo({top:g.getBoundingClientRect().top+scrollY-navOffset()+4,behavior:reduce?'auto':'smooth'})}));
 let cardIO=null;
 function watchCards(){if(reduce||!('IntersectionObserver' in window))return;cardIO&&cardIO.disconnect();
   cardIO=new IntersectionObserver(es=>es.forEach(en=>{if(en.isIntersecting){en.target.classList.add('enter');cardIO.unobserve(en.target)}}),{rootMargin:'0px 0px -6% 0px'});
@@ -1356,7 +1373,6 @@ function watchCards(){if(reduce||!('IntersectionObserver' in window))return;card
 renderMenu(false);
 moveInd();addEventListener('resize',moveInd);document.fonts&&document.fonts.ready.then(moveInd);
 let qt;$('#menuSearch').addEventListener('input',e=>{clearTimeout(qt);qt=setTimeout(()=>{query=norm(e.target.value.trim());renderMenu(!reduce)},180)});
-$$('.chip').forEach(c=>c.addEventListener('click',()=>{const t=c.dataset.tag,on=!activeTags.has(t);on?activeTags.add(t):activeTags.delete(t);c.setAttribute('aria-pressed',on);renderMenu(!reduce)}));
 grid.addEventListener('change',e=>{const c=e.target.closest('[data-combo]');if(!c)return;const id=c.dataset.combo;c.checked?comboOn.add(id):comboOn.delete(id);
   const r=$(`[data-row="${id}"]`);if(r)r.innerHTML=rowHTML(byId[id])});
 grid.addEventListener('click',e=>{const t=e.target.closest('.opts-toggle');if(!t)return;const c=t.closest('.card');const on=c.classList.toggle('expanded');t.setAttribute('aria-expanded',on)});
@@ -1391,7 +1407,7 @@ grid.addEventListener('click',e=>{
 /* ---------- Monte o seu: lógica ---------- */
 (()=>{const stage=$('#bBurger'),ingsEl=$('#bIngs'),presetsEl=$('#bPresets');let bq={},prevLayers=[];
   const icon=k=>{const L=LAYERS[k],R=rng(7),y=L.h+20;return `<svg viewBox="50 ${y-L.h-12} 200 ${L.h+26}" preserveAspectRatio="xMidYMid meet" aria-hidden="true">${L.d(y,R)}</svg>`};
-  ingsEl.innerHTML=ING.map(i=>`<div class="ing" data-k="${i.k}"><button class="ing-add" type="button" data-ing="${i.k}" aria-label="Pôr ${i.n}, mais ${money(i.p)}">${icon(i.k)}<span class="ing-n">${i.n}</span><span class="ing-p">${i.p?'+ '+money(i.p):'grátis'}</span></button><button class="ing-rm" type="button" data-ing-rm="${i.k}" aria-label="Tirar ${i.n}">−</button><span class="ing-q" aria-hidden="true"></span></div>`).join('');
+  ingsEl.innerHTML=ING.map(i=>`<div class="ing" data-k="${i.k}"><button class="ing-add" type="button" data-ing="${i.k}"><span class="sr">Pôr </span>${icon(i.k)}<span class="ing-n">${i.n}</span><span class="ing-p">${i.p?'+ '+money(i.p):'grátis'}</span></button><button class="ing-rm" type="button" data-ing-rm="${i.k}" aria-label="Tirar ${i.n}">−</button><span class="ing-q" aria-hidden="true"></span></div>`).join('');
   presetsEl.innerHTML=B_PRESETS.map((pr,i)=>`<button class="b-pre" type="button" data-pre="${i}">${pr.n}</button>`).join('');
   let shownPrice=qPrice({}),shownKcal=qKcal({}),numRaf=0;
   function animateNums(){cancelAnimationFrame(numRaf);const tp=qPrice(bq),tk=qKcal(bq),fp=shownPrice,fk=shownKcal,t0=performance.now();
@@ -1456,7 +1472,7 @@ function renderTicket(){
   if(placed){free.hidden=true;checkout.hidden=true;waBtn.hidden=true;
     ticket.innerHTML=`<div class="done"><svg viewBox="0 0 80 80" fill="none" stroke="var(--herb)" stroke-width="5" stroke-linecap="round" stroke-linejoin="round"><circle cx="40" cy="40" r="36"/><path d="M24 41l11 11 21-23"/></svg><b>Quase lá!</b><p>Abrimos o WhatsApp com o pedido ${placed.no} já escrito. Envie a mensagem para a loja confirmar o pedido e o tempo de ${placed.mode==='entrega'?'entrega':'retirada'}.</p><p class="demo">Total ${money(placed.total)} · O pagamento é combinado na conversa.</p><div class="done-actions"><a class="btn btn-wa" href="${placed.url}" target="_blank" rel="noopener noreferrer">Abrir o WhatsApp de novo</a><button class="link-btn" id="copyOrder">Copiar mensagem do pedido</button><button class="link-btn" id="newOrder">Fazer um novo pedido</button></div></div>`;
     $('#copyOrder').onclick=e=>{const b=e.currentTarget;const ok=()=>b.textContent='Mensagem copiada';try{navigator.clipboard.writeText(placed.text).then(ok,()=>{b.textContent='Não foi possível copiar'})}catch(err){b.textContent='Não foi possível copiar'}};
-    $('#newOrder').onclick=()=>{placed=null;cart={};sync(true)};return}
+    $('#newOrder').onclick=()=>{placed=null;sync(true)};return}
   const ids=Object.keys(cart),{sub,fee,total}=fees();
   const head=`<div class="t-head"><b>Brasa &amp; Pão</b><div>Comanda ${ticketNo} · ${mode==='entrega'?'Entrega':'Retirada'} · ${time}</div></div>`;
   if(mode==='entrega'&&ids.length){free.hidden=false;const left=FREE_AT-sub;free.innerHTML=(left>0?`Faltam <b>${money(left)}</b> para a entrega grátis`:`<b>Entrega grátis liberada!</b>`)+`<div class="bar"><i style="width:${Math.min(100,sub/FREE_AT*100).toFixed(1)}%"></i></div>`}else free.hidden=true;
@@ -1487,7 +1503,7 @@ waBtn.addEventListener('click',e=>{
   const text=orderText(),url=`https://wa.me/${WHATSAPP}?text=${encodeURIComponent(text)}`;
   waBtn.href=url;
   placed={no:ticketNo,total:fees().total,mode,url,text};
-  setTimeout(()=>sync(false),50);
+  setTimeout(()=>{cart={};sync(false)},50);
 });
 function sync(bump){
   save();countEl.textContent=qtyTotal();
@@ -1501,9 +1517,10 @@ function updateMbar(bump){const mb=$('#mbar');if(!mb)return;const q=qtyTotal(),o
 sync(false);
 
 /* Drawer */
-const drawer=$('#drawer'),scrim=$('#scrim');let lastFocus=null;
-const openCart=()=>{lastFocus=document.activeElement;renderTicket();drawer.classList.add('open');updateMbar();scrim.classList.add('show');drawer.setAttribute('aria-hidden','false');$('#closeCart').focus()};
-const closeCart=()=>{drawer.classList.remove('open');updateMbar();scrim.classList.remove('show');drawer.setAttribute('aria-hidden','true');lastFocus&&lastFocus.focus()};
+const drawer=$('#drawer'),scrim=$('#scrim');let lastFocus=null;drawer.inert=true;
+const behind=()=>['#hdr','main','#contato','#mbar'].map(q=>$(q)).filter(Boolean);
+const openCart=()=>{lastFocus=document.activeElement;renderTicket();drawer.inert=false;behind().forEach(el=>el.inert=true);drawer.classList.add('open');updateMbar();scrim.classList.add('show');$('#closeCart').focus()};
+const closeCart=()=>{drawer.inert=true;behind().forEach(el=>el.inert=false);drawer.classList.remove('open');updateMbar();scrim.classList.remove('show');lastFocus&&lastFocus.focus()};
 cartBtn.addEventListener('click',openCart);$('#mbar').addEventListener('click',openCart);$('#closeCart').addEventListener('click',closeCart);scrim.addEventListener('click',closeCart);
 document.addEventListener('keydown',e=>{if(e.key==='Escape'&&drawer.classList.contains('open'))closeCart()});
 $$('[data-cta="order"]').forEach(a=>a.addEventListener('click',()=>{if(qtyTotal()>0)setTimeout(openCart,0)}));
