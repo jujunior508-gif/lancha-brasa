@@ -221,17 +221,18 @@ button{font:inherit;cursor:pointer;color:inherit}
 @keyframes cardIn{from{opacity:0;transform:translateY(40px) scale(.96)}}
 .pic{position:relative;aspect-ratio:5/4;max-width:100%;background:var(--studio);display:grid;place-items:center;overflow:hidden}
 .pic:not(.has-photo)::before{content:"";position:absolute;left:0;right:0;bottom:0;height:30%;background:repeating-linear-gradient(178deg,rgba(255,220,180,.035) 0 2px,transparent 2px 9px),linear-gradient(#3B281C,#21160F);border-top:1px solid rgba(255,200,150,.14);box-shadow:inset 0 14px 22px -14px rgba(0,0,0,.8)}
-.pic svg{position:relative;z-index:1}
+.pic svg,.pic img.art{position:relative;z-index:1}
 .pic::after{content:"";position:absolute;inset:0;background:radial-gradient(60% 40% at 50% 0%,rgba(255,214,160,.16),transparent 70%);pointer-events:none}
 .pic .photo{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;transition:transform .8s cubic-bezier(.2,.8,.2,1),filter .4s}
 .pic.has-photo::after{background:linear-gradient(to top,rgba(10,6,4,.45),transparent 40%),radial-gradient(60% 40% at 50% 0%,rgba(255,214,160,.12),transparent 70%)}
 .card:hover .pic .photo{transform:scale(1.07);filter:saturate(1.08) contrast(1.03)}
 .pic.has-photo .kcal{color:#fff;text-shadow:0 1px 3px rgba(0,0,0,.6)}
+.pic img.art{width:74%;height:84%;object-fit:contain;transition:transform .7s cubic-bezier(.2,.8,.2,1);filter:drop-shadow(0 18px 18px rgba(0,0,0,.35))}
 .pic svg{width:74%;height:84%;overflow:visible;transition:transform .7s cubic-bezier(.2,.8,.2,1);filter:drop-shadow(0 18px 18px rgba(0,0,0,.35))}
 .pic .layer{transition:transform .6s cubic-bezier(.3,1.4,.5,1);transition-delay:calc(var(--i) * 18ms)}
 .card:hover .pic .layer{transform:translateY(calc(var(--i) * -6px))}
-.card:hover .pic svg{transform:scale(1.06) rotate(-2.5deg)}
-.card:hover .pic svg.side{transform:scale(1.08) rotate(3deg)}
+.card:hover .pic svg,.card:hover .pic img.art.burger{transform:scale(1.06) rotate(-2.5deg)}
+.card:hover .pic svg.side,.card:hover .pic img.art.side{transform:scale(1.08) rotate(3deg)}
 .badge{position:absolute;z-index:2;top:14px;left:14px;font-family:var(--f-mono);font-size:.68rem;letter-spacing:.1em;text-transform:uppercase;font-weight:600;background:var(--gold);color:#1A0F08;padding:5px 11px;border-radius:999px}
 .badge.veg{background:#7FB84A}
 .badge.hot{background:#E2471B;color:#fff}
@@ -254,7 +255,7 @@ button{font:inherit;cursor:pointer;color:inherit}
 .add.added .ico{transform:rotate(360deg)}
 .in-cart{font-family:var(--f-mono);font-size:.76rem;color:var(--herb);font-weight:600;min-width:5em;text-align:right}
 .flyer{position:fixed;z-index:120;width:90px;height:90px;pointer-events:none;border-radius:50%;background:var(--studio);display:grid;place-items:center;box-shadow:0 10px 30px rgba(0,0,0,.4)}
-.flyer svg{width:80%;height:80%}
+.flyer svg,.flyer img.art{width:80%;height:80%;object-fit:contain}
 
 /* ===== Anatomia (scroll scene) ===== */
 .anat{position:relative;background:var(--char);color:var(--on-char);padding-block:80px 72px;overflow:hidden}
@@ -320,6 +321,7 @@ button{font:inherit;cursor:pointer;color:inherit}
 .who b{display:block}
 .who span{font-family:var(--f-mono);font-size:.76rem;color:var(--muted)}
 .slide-side{background:var(--studio);display:grid;place-items:center;padding:24px;position:relative}
+.slide-side img.art{width:82%;filter:drop-shadow(0 14px 16px rgba(0,0,0,.4))}
 .slide-side svg{width:82%;filter:drop-shadow(0 14px 16px rgba(0,0,0,.4))}
 .slide-side span{position:absolute;bottom:16px;left:0;right:0;text-align:center;font-family:var(--f-mono);font-size:.7rem;color:rgba(246,237,230,.7);letter-spacing:.08em;text-transform:uppercase}
 .stars{display:flex;gap:3px}
@@ -427,6 +429,7 @@ button{font:inherit;cursor:pointer;color:inherit}
 .sum div{display:flex;justify-content:space-between}
 .sum .tot{font-weight:600;font-size:1.08rem;border-top:2px solid var(--ink);margin-top:8px;padding-top:9px}
 .empty{text-align:center;color:var(--muted);padding:26px 6px;display:grid;gap:12px;justify-items:center;font-family:var(--f-body)}
+.empty img.art{width:130px;animation:bob 3s ease-in-out infinite}
 .empty svg{width:130px;animation:bob 3s ease-in-out infinite}
 .place{width:100%;justify-content:center;flex:none}
 .btn-wa{background:#0E7A3A;color:#fff;font-size:1.05rem;box-shadow:0 14px 28px -14px rgba(31,175,85,.8)}
@@ -529,7 +532,7 @@ button{font:inherit;cursor:pointer;color:inherit}
   .card{display:grid;grid-template-columns:124px minmax(0,1fr);align-items:start;border-radius:14px}
   .card:hover{transform:none;box-shadow:none;border-color:var(--line)}
   .card .pic{aspect-ratio:1;width:112px;height:112px;margin:12px 0 0 12px;border-radius:12px}
-  .card .pic svg{width:86%;height:86%}
+  .card .pic svg,.card .pic img.art{width:86%;height:86%}
   .card .badge{top:6px;left:6px;font-size:.56rem;padding:3px 7px;letter-spacing:.06em}
   .card .kcal,.card .info,.card .spec{display:none}
   .card .body{padding:12px 14px 14px 12px;gap:6px}
@@ -1282,7 +1285,13 @@ const item=key=>{if(String(key).startsWith('custom|'))return customItem(key);con
   return c?{m,name:m.name+' + combo',price:m.price+COMBO}:{m,name:m.name,price:m.price}};
 const norm=t=>t.normalize('NFD').replace(/[̀-ͯ]/g,'').toLowerCase();
 const artCache={};
-const art=m=>artCache[m.id]||(artCache[m.id]=m.layers?burgerSVG(m.layers,m.id.length*13+7,0,'',true).html:m.svg());
+/* Desenhos entregues como imagem (<img>): o modo escuro forçado de alguns celulares
+   (Samsung Internet, Chrome) repinta desenhos feitos em código, mas não mexe em imagens. */
+const toImg=(svg,cls='')=>{const ids=[...new Set([...svg.matchAll(/url\(#([\w-]+)\)/g)].map(m=>m[1]))];
+  const defs=ids.map(id=>{const el=document.getElementById(id);return el?el.outerHTML:''}).join('');
+  const full=svg.replace(/^<svg /,'<svg xmlns="http://www.w3.org/2000/svg" ').replace(/(<svg[^>]*>)/,'$1<defs>'+defs+'</defs>');
+  return `<img class="art ${cls}" src="data:image/svg+xml;charset=utf-8,${encodeURIComponent(full)}" alt="" decoding="async">`};
+const art=m=>artCache[m.id]||(artCache[m.id]=toImg(m.layers?burgerSVG(m.layers,m.id.length*13+7,0,'',true).html:m.svg(),m.layers?'burger':'side'));
 /* Foto real quando o item tem "foto"; se o arquivo faltar, volta para a ilustração */
 const safeSrc=u=>/^(fotos\/[\w.-]+\.(jpe?g|png|webp|avif)|data:image\/(jpeg|png|webp|avif);base64,[A-Za-z0-9+\/=]+)$/i.test(u||'')?u:'';
 const picHTML=m=>{const src=safeSrc(m.foto);if(!src)return art(m);
@@ -1464,7 +1473,7 @@ const WHATSAPP=LOJA.whatsapp;
 const ticket=$('#ticket'),waBtn=$('#waBtn'),seg=$('#seg'),free=$('#free'),checkout=$('#checkout'),coMsg=$('#checkoutMsg');
 const cName=$('#cName'),cAddr=$('#cAddr'),cPay=$('#cPay'),cNote=$('#cNote'),addrField=$('#addrField');
 const ticketNo='BP-'+String(400+Math.floor(Math.random()*500)).padStart(4,'0');
-const emptyArt=burgerSVG(['bunBottom','bunTop'],3).html;
+const emptyArt=toImg(burgerSVG(['bunBottom','bunTop'],3).html);
 const clean=(v,max)=>String(v||'').replace(/[\u0000-\u001f\u007f<>]/g,' ').replace(/\s+/g,' ').trim().slice(0,max);
 try{const d=JSON.parse(localStorage.getItem('bp-checkout')||'{}');if(d&&typeof d==='object'){cName.value=clean(d.n,60);cAddr.value=clean(d.a,160);if(['Pix','Cartão (na entrega ou retirada)','Dinheiro'].includes(d.p))cPay.value=d.p}}catch(e){}
 const saveCheckout=()=>{try{localStorage.setItem('bp-checkout',JSON.stringify({n:clean(cName.value,60),a:clean(cAddr.value,160),p:cPay.value}))}catch(e){}};
