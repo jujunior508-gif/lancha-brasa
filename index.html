@@ -6,6 +6,8 @@
 <meta http-equiv="Content-Security-Policy" content="default-src 'none'; script-src 'unsafe-inline'; style-src 'unsafe-inline' https://fonts.googleapis.com; font-src https://fonts.gstatic.com; img-src 'self' data:; connect-src 'none'; object-src 'none'; base-uri 'none'; form-action 'none'">
 <meta name="referrer" content="strict-origin-when-cross-origin">
 <meta name="description" content="Brasa & Pão: hamburgueria artesanal em Pinheiros, São Paulo. Blend moído todo dia, brioche da casa, monte seu lanche e peça pelo WhatsApp.">
+<meta name="color-scheme" content="light dark">
+<meta name="supported-color-schemes" content="light dark">
 <meta name="theme-color" content="#17110E">
 <meta property="og:type" content="restaurant">
 <meta property="og:locale" content="pt_BR">
@@ -28,6 +30,8 @@
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Big+Shoulders+Display:wght@700;800;900&family=Figtree:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500;600&display=swap" media="print" onload="this.media='all'">
 <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Big+Shoulders+Display:wght@700;800;900&family=Figtree:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500;600&display=swap"></noscript>
 <style>
+/* O site tem tema claro e escuro próprios: isso impede o navegador do celular de "escurecer" as cores por conta própria */
+:root{color-scheme:light dark}
 /* Layout: espresso "grill" bands (hero, anatomia, rodapé) alternate with clean counter-top sections; product shots sit on a dark studio backdrop. */
 :root{
   --bg:#FAF7F3; --surface:#FFFFFF; --surface-2:#F3ECE5; --ink:#1F1512; --muted:#6B5B54; --line:#E6DBD2;
