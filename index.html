@@ -12,7 +12,10 @@
 <meta property="og:site_name" content="Brasa & Pão">
 <meta property="og:title" content="Brasa & Pão Hamburgueria · Pinheiros, SP">
 <meta property="og:description" content="Blend moído todo dia, brioche da casa e pedido direto pelo WhatsApp. Monte seu lanche do seu jeito.">
-<meta name="twitter:card" content="summary">
+<meta property="og:image" content="https://jujunior508-gif.github.io/lancha-brasa/og.jpg">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 48 48'%3E%3Ccircle cx='24' cy='24' r='23' fill='%23CF4E1A'/%3E%3Cpath d='M24 7c3 6 9 9 9 17a9 9 0 0 1-18 0c0-4 2-6 4-8 0 3 1 5 3 5-1-5 0-10 2-14z' fill='%23E8A63A'/%3E%3C/svg%3E">
 <script type="application/ld+json">
 {"@context":"https://schema.org","@type":"Restaurant","name":"Brasa & Pão Hamburgueria","servesCuisine":["Hambúrguer","Lanches"],"priceRange":"R$ 15–50","telephone":"+55 11 3062-1240","address":{"@type":"PostalAddress","streetAddress":"Rua dos Pinheiros, 1240","addressLocality":"São Paulo","addressRegion":"SP","postalCode":"05422-001","addressCountry":"BR"},"openingHoursSpecification":[{"@type":"OpeningHoursSpecification","dayOfWeek":["Tuesday","Wednesday","Thursday"],"opens":"11:30","closes":"23:00"},{"@type":"OpeningHoursSpecification","dayOfWeek":["Friday","Saturday"],"opens":"11:30","closes":"23:59"},{"@type":"OpeningHoursSpecification","dayOfWeek":"Sunday","opens":"12:00","closes":"22:00"}],"hasMenu":"#cardapio","acceptsReservations":false}
@@ -327,7 +330,7 @@ button{font:inherit;cursor:pointer;color:inherit}
 .dot{position:relative;width:36px;height:4px;border-radius:4px;border:0;background:var(--line);padding:0;overflow:hidden}
 .dot i{position:absolute;inset:0;background:var(--ember);transform:scaleX(0);transform-origin:left}
 .dot.on i{animation:fill var(--dur,6s) linear forwards}
-.dot.done i{transform:scaleX(1)}
+.dot.past i{transform:scaleX(1)}
 .carousel.paused .dot.on i{animation-play-state:paused}
 @keyframes fill{to{transform:scaleX(1)}}
 @media (max-width:760px){.slide{grid-template-columns:1fr}.slide-side{display:none}.slide-main{padding:30px 24px}}
@@ -422,8 +425,8 @@ button{font:inherit;cursor:pointer;color:inherit}
 .empty{text-align:center;color:var(--muted);padding:26px 6px;display:grid;gap:12px;justify-items:center;font-family:var(--f-body)}
 .empty svg{width:130px;animation:bob 3s ease-in-out infinite}
 .place{width:100%;justify-content:center;flex:none}
-.btn-wa{background:#1FAF55;color:#fff;font-size:1.05rem;box-shadow:0 14px 28px -14px rgba(31,175,85,.8)}
-.btn-wa:hover{transform:translateY(-2px);background:#18994A}
+.btn-wa{background:#0E7A3A;color:#fff;font-size:1.05rem;box-shadow:0 14px 28px -14px rgba(31,175,85,.8)}
+.btn-wa:hover{transform:translateY(-2px);background:#0B6630}
 .btn-wa.disabled{opacity:.45;pointer-events:none;box-shadow:none}
 .wa-note{font-size:.76rem;color:var(--muted);text-align:center;flex:none}
 .checkout{display:grid;gap:10px;flex:none}
@@ -475,9 +478,30 @@ button{font:inherit;cursor:pointer;color:inherit}
 .q.pop{animation:pop .3s cubic-bezier(.3,1.8,.5,1)}
 @keyframes pop{50%{transform:scale(1.45)}}
 .row-total{margin-left:auto;font-family:var(--f-mono);font-weight:600;color:var(--ember)}
-.opts-toggle{display:none}
+.opts-toggle{display:flex;align-items:center;justify-content:space-between;width:100%;background:none;border:1px dashed var(--line);border-radius:10px;padding:9px 12px;font-size:.84rem;font-weight:700;color:var(--ink);transition:border-color .2s}
+.opts-toggle:hover{border-color:var(--ember)}
+.opts-toggle::after{content:"+";font-family:var(--f-mono);color:var(--ember);transition:transform .3s}
+.card.expanded .opts-toggle::after{transform:rotate(45deg)}
+.card .opts{display:none}
+.card.expanded .opts{display:block;animation:fadeUp .3s ease}
+.info summary{list-style:none;cursor:pointer;font-size:.8rem;font-weight:600;color:var(--muted);display:inline-flex;align-items:center;gap:6px}
+.info summary::-webkit-details-marker{display:none}
+.info summary::after{content:"▾";font-size:.7rem;transition:transform .25s}
+.info[open] summary::after{transform:rotate(180deg)}
+.info[open]{display:grid;gap:8px}
+.info .notes{margin-top:8px}
+.foot-wa{margin-top:16px;padding:13px 22px;font-size:.95rem}
 .mbar{display:none}
 @media (max-width:620px){
+  .hero-grid{padding-block:12px 40px}
+  .stage{padding-top:4px}
+  .stage-inner{max-width:200px !important}
+  .restack{display:none}
+  .steam{display:none}
+  .hero .eyebrow{font-size:.68rem}
+  .hero h1{margin-top:10px}
+  .lede{margin-top:14px}
+  .cta-row{margin-top:20px}
   .sec{padding-block:72px}
   .sec-head{margin-bottom:22px}
   .sec-head h2,.h2{font-size:clamp(2.3rem,11vw,3rem)}
@@ -503,7 +527,7 @@ button{font:inherit;cursor:pointer;color:inherit}
   .card .pic{aspect-ratio:1;width:112px;height:112px;margin:12px 0 0 12px;border-radius:12px}
   .card .pic svg{width:86%;height:86%}
   .card .badge{top:6px;left:6px;font-size:.56rem;padding:3px 7px;letter-spacing:.06em}
-  .card .kcal,.card .notes,.card .allerg,.card .spec{display:none}
+  .card .kcal,.card .info,.card .spec{display:none}
   .card .body{padding:12px 14px 14px 12px;gap:6px}
   .card .title-row{flex-direction:column;align-items:flex-start;gap:2px}
   .card h3{font-size:1.4rem}
@@ -689,17 +713,13 @@ button{font:inherit;cursor:pointer;color:inherit}
         <a class="btn btn-ghost" href="#cardapio">Ver cardápio</a>
       </div>
       <div class="stats fade-up" style="--d:.85s">
-        <div class="stat"><b data-count="180" data-suffix=" g">180 g</b><span>Blend acém + peito</span></div>
-        <div class="stat"><b data-count="230" data-suffix=" °C">230 °C</b><span>Chapa de ferro</span></div>
-        <div class="stat"><b data-count="12" data-prefix="~" data-suffix=" min">~12 min</b><span>Tempo médio de preparo</span></div>
+        <div class="stat"><b>180 g</b><span>Blend acém + peito</span></div>
+        <div class="stat"><b>230 °C</b><span>Chapa de ferro</span></div>
+        <div class="stat"><b>~12 min</b><span>Tempo médio de preparo</span></div>
       </div>
     </div>
     <div class="stage">
       <div class="stage-inner" id="stageInner">
-        <div class="badge-spin" aria-hidden="true">
-          <svg viewBox="0 0 120 120"><defs><path id="circ" d="M60 60m-48 0a48 48 0 1 1 96 0a48 48 0 1 1-96 0"/></defs><circle cx="60" cy="60" r="58" fill="#17110E" stroke="#E8A63A" stroke-width="1.5"/><text font-family="IBM Plex Mono, monospace" font-size="8.6" letter-spacing="1.1" fill="#F6EDE6"><textPath href="#circ">MOÍDO TODO DIA · PÃO DA CASA · DESDE 2014 ·</textPath></text></svg>
-          <div class="core">100%<br>blend<br>próprio</div>
-        </div>
         <svg class="steam" viewBox="0 0 200 120" aria-hidden="true"><path d="M60 110c-14-20 14-30 0-52s12-34 0-50"/><path d="M100 110c-14-20 14-30 0-52s12-34 0-50"/><path d="M140 110c-14-20 14-30 0-52s12-34 0-50"/></svg>
         <div class="float"><div id="heroBurger" role="img" aria-label="Ilustração de um hambúrguer artesanal se montando camada por camada"></div></div>
         <button class="restack" id="restack">↻ Montar de novo</button>
@@ -784,25 +804,6 @@ button{font:inherit;cursor:pointer;color:inherit}
   </div>
 </section>
 
-<section class="anat" id="anatomia" aria-label="Anatomia do Brasa Clássico">
-  <div class="anat-sticky">
-    <div class="anat-head wrap">
-      <p class="eyebrow">Anatomia</p>
-      <h2>Brasa Clássico, camada por camada</h2>
-    </div>
-    <div class="anat-stage" id="anatStage">
-      <div class="anat-fig" id="anatFig"></div>
-    </div>
-    <div class="anat-foot wrap">
-      <div class="anat-ctrl">
-        <button class="btn btn-primary" id="explodeBtn" aria-pressed="false"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" aria-hidden="true"><path d="M12 3v6M12 15v6M8 6l4-3 4 3M8 18l4 3 4-3"/></svg><span>Desmontar o burger</span></button>
-        <label class="anat-range"><span class="sr">Separar as camadas</span><span aria-hidden="true">Montado</span><input type="range" id="anatRange" min="0" max="100" value="0"><span aria-hidden="true">Desmontado</span></label>
-      </div>
-      <p id="anatCap">Toque no botão, no burger ou arraste o controle</p>
-    </div>
-  </div>
-</section>
-
 <section class="sec" id="sobre">
   <div class="wrap about-grid">
     <div class="about-copy reveal-l reveal">
@@ -810,12 +811,6 @@ button{font:inherit;cursor:pointer;color:inherit}
       <h2 class="h2">Hambúrguer é receita curta. Cada etapa conta.</h2>
       <p class="big">A Brasa &amp; Pão nasceu como um food truck numa feira de domingo em Pinheiros. Doze anos depois, seguimos comprando peças inteiras e moendo tudo antes de abrir as portas.</p>
       <p>O brioche é assado às 4h na padaria do outro lado da rua, os picles passam cinco dias na salmoura no nosso porão e o barbecue leva rapadura de Minas. O que sobra no fim do dia não volta no dia seguinte.</p>
-      <div class="counters">
-        <div><b data-count="12">12</b><span>anos na chapa</span></div>
-        <div><b data-count="4800" data-sep="1">4.800</b><span>burgers por semana</span></div>
-        <div><b data-count="3284" data-sep="1">3.284</b><span>avaliações 5 estrelas</span></div>
-        <div><b data-count="0">0</b><span>itens congelados</span></div>
-      </div>
     </div>
     <ol class="steps reveal" id="steps" style="--d:.15s">
       <span class="rail" aria-hidden="true"></span>
@@ -834,7 +829,6 @@ button{font:inherit;cursor:pointer;color:inherit}
         <p class="eyebrow">Avaliações</p>
         <h2>Quem prova, volta.</h2>
       </div>
-      <div class="rating-sum"><b>4,9</b><div><span id="sumStars"></span><small>média de 3.284 avaliações</small></div></div>
     </div>
     <div class="carousel reveal" id="carousel" aria-roledescription="carrossel" aria-label="Avaliações de clientes">
       <div class="viewport"><div class="track" id="track"></div></div>
@@ -850,17 +844,15 @@ button{font:inherit;cursor:pointer;color:inherit}
 </section>
 
 <section class="cta">
-  <canvas class="embers" data-embers="90"></canvas>
   <div class="wrap reveal">
     <h2>Fome?<br><span>A chapa já está quente.</span></h2>
     <p>Peça para retirar na Rua dos Pinheiros ou receba em casa em até 40 minutos. Entrega grátis acima de R$ 120.</p>
     <div class="cta-row">
-      <a class="btn btn-primary pulse" href="#cardapio" data-cta="order">Peça agora
+      <a class="btn btn-primary" href="#cardapio" data-cta="order">Peça agora
         <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
       <a class="btn btn-ghost" href="#cardapio">Ver cardápio</a>
     </div>
   </div>
-  <div class="flames" id="flames" aria-hidden="true"></div>
   <div class="grill" aria-hidden="true"></div>
 </section>
 </main>
@@ -871,10 +863,10 @@ button{font:inherit;cursor:pointer;color:inherit}
       <h3>Brasa &amp; Pão</h3>
       <p>Hambúrguer de blend próprio, batata cortada à mão e milkshake de sorvete artesanal em Pinheiros desde 2014.</p>
       <div class="socials">
-        <a href="https://www.instagram.com/" target="_blank" rel="noopener noreferrer" aria-label="Instagram"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1" fill="currentColor"/></svg></a>
-        <a href="https://www.facebook.com/" target="_blank" rel="noopener noreferrer" aria-label="Facebook"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M14 8h3V4h-3c-2.8 0-4.5 1.8-4.5 4.6V11H7v4h2.5v6h4v-6H16l.6-4h-3.1V8.9c0-.6.4-.9.9-.9z"/></svg></a>
-        <a href="https://www.tiktok.com/" target="_blank" rel="noopener noreferrer" aria-label="TikTok"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M16.5 3c.4 2.3 1.9 3.9 4 4.1v3.4c-1.5 0-2.9-.4-4-1.2v6.2a5.6 5.6 0 1 1-5.6-5.6c.3 0 .6 0 .9.1v3.5a2.2 2.2 0 1 0 1.3 2V3z"/></svg></a>
-        <a href="https://wa.me/5511930621240" target="_blank" rel="noopener noreferrer" aria-label="WhatsApp" data-wa><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2a10 10 0 0 0-8.6 15.1L2 22l5-1.3A10 10 0 1 0 12 2zm0 18.2c-1.6 0-3.1-.4-4.4-1.2l-.3-.2-3 .8.8-2.9-.2-.3A8.2 8.2 0 1 1 12 20.2zm4.5-6.1c-.2-.1-1.5-.7-1.7-.8-.2-.1-.4-.1-.6.1l-.8 1c-.1.2-.3.2-.5.1-.7-.3-1.4-.7-2-1.3-.5-.5-1-1.1-1.3-1.7-.1-.2 0-.4.1-.5l.4-.5.3-.5v-.5l-.8-1.9c-.2-.5-.4-.4-.6-.4h-.5c-.2 0-.5.1-.7.3-.7.7-1 1.6-1 2.5.1 1.1.5 2.1 1.2 3 1.2 1.8 2.8 3.2 4.8 4 .5.2 1 .4 1.5.5.6.2 1.2.2 1.8.1.7-.1 1.4-.6 1.8-1.2.2-.4.2-.8.2-1.2l-.6-.4z"/></svg></a>
+        <a data-social="instagram" target="_blank" rel="noopener noreferrer" aria-label="Instagram"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1" fill="currentColor"/></svg></a>
+        <a data-social="facebook" target="_blank" rel="noopener noreferrer" aria-label="Facebook"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M14 8h3V4h-3c-2.8 0-4.5 1.8-4.5 4.6V11H7v4h2.5v6h4v-6H16l.6-4h-3.1V8.9c0-.6.4-.9.9-.9z"/></svg></a>
+        <a data-social="tiktok" target="_blank" rel="noopener noreferrer" aria-label="TikTok"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M16.5 3c.4 2.3 1.9 3.9 4 4.1v3.4c-1.5 0-2.9-.4-4-1.2v6.2a5.6 5.6 0 1 1-5.6-5.6c.3 0 .6 0 .9.1v3.5a2.2 2.2 0 1 0 1.3 2V3z"/></svg></a>
+        <a data-social="whatsapp" target="_blank" rel="noopener noreferrer" aria-label="WhatsApp"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2a10 10 0 0 0-8.6 15.1L2 22l5-1.3A10 10 0 1 0 12 2zm0 18.2c-1.6 0-3.1-.4-4.4-1.2l-.3-.2-3 .8.8-2.9-.2-.3A8.2 8.2 0 1 1 12 20.2zm4.5-6.1c-.2-.1-1.5-.7-1.7-.8-.2-.1-.4-.1-.6.1l-.8 1c-.1.2-.3.2-.5.1-.7-.3-1.4-.7-2-1.3-.5-.5-1-1.1-1.3-1.7-.1-.2 0-.4.1-.5l.4-.5.3-.5v-.5l-.8-1.9c-.2-.5-.4-.4-.6-.4h-.5c-.2 0-.5.1-.7.3-.7.7-1 1.6-1 2.5.1 1.1.5 2.1 1.2 3 1.2 1.8 2.8 3.2 4.8 4 .5.2 1 .4 1.5.5.6.2 1.2.2 1.8.1.7-.1 1.4-.6 1.8-1.2.2-.4.2-.8.2-1.2l-.6-.4z"/></svg></a>
       </div>
     </div>
     <div>
@@ -883,9 +875,9 @@ button{font:inherit;cursor:pointer;color:inherit}
         <li>Rua dos Pinheiros, 1240</li>
         <li>Pinheiros · São Paulo, SP</li>
         <li>CEP 05422-001</li>
-        <li style="margin-top:10px">WhatsApp (pedidos): (11) 93062-1240<button class="copy-btn" data-copy="(11) 93062-1240">Copiar</button></li>
-        <li>Telefone: (11) 3062-1240<button class="copy-btn" data-copy="(11) 3062-1240">Copiar</button></li>
-        <li>ola@brasaepao.com.br<button class="copy-btn" data-copy="ola@brasaepao.com.br">Copiar</button></li>
+        <li style="margin-top:10px">WhatsApp (pedidos): <span data-loja="whatsappTexto">(11) 93062-1240</span><button class="copy-btn" data-copy-from="whatsappTexto">Copiar</button></li>
+        <li>Telefone: <span data-loja="telefone">(11) 3062-1240</span><button class="copy-btn" data-copy-from="telefone">Copiar</button></li>
+        <li><span data-loja="email">ola@brasaepao.com.br</span><button class="copy-btn" data-copy-from="email">Copiar</button></li>
       </ul>
     </div>
     <div>
@@ -899,14 +891,9 @@ button{font:inherit;cursor:pointer;color:inherit}
       <p class="open-now" id="openNow"><i></i><span></span></p>
     </div>
     <div>
-      <h3>O Burger da Semana</h3>
-      <p>Um e-mail toda quinta com o burger fora do cardápio da semana. Sem spam.</p>
-      <form class="news-form" id="newsForm" novalidate>
-        <label for="email" class="sr">Endereço de e-mail</label>
-        <input id="email" name="email" type="email" placeholder="voce@email.com" autocomplete="email">
-        <button type="submit">Quero receber</button>
-      </form>
-      <p class="form-msg" id="formMsg" role="status"></p>
+      <h3>Fale com a gente</h3>
+      <p>Pedidos, encomendas para festas e dúvidas sobre o cardápio, direto no WhatsApp da loja.</p>
+      <a class="btn btn-wa foot-wa" data-social="whatsapp" target="_blank" rel="noopener noreferrer">Chamar no WhatsApp</a>
     </div>
   </div>
   <div class="wrap foot-base">
@@ -951,6 +938,17 @@ const finePointer = matchMedia('(pointer: fine)').matches;
 const $ = s => document.querySelector(s), $$ = s => [...document.querySelectorAll(s)];
 const brl = new Intl.NumberFormat('pt-BR',{style:'currency',currency:'BRL'});
 const money = n => brl.format(n);
+
+/* =====================================================================
+   DADOS DA LOJA: troque pelos dados reais antes de publicar.
+   whatsapp: código do país + DDD + número, só dígitos.
+   Redes sociais: endereço completo do perfil; deixe '' para esconder o ícone.
+   ===================================================================== */
+const LOJA={
+  whatsapp:'5511930621240', whatsappTexto:'(11) 93062-1240',
+  telefone:'(11) 3062-1240', email:'ola@brasaepao.com.br',
+  instagram:'', facebook:'', tiktok:''
+};
 
 /* ---------- Seeded randomness so each illustration is stable ---------- */
 const rng = seed => () => { seed |= 0; seed = seed + 0x6D2B79F5 | 0; let t = Math.imul(seed ^ seed >>> 15, 1 | seed); t = t + Math.imul(t ^ t >>> 7, 61 | t) ^ t; return ((t ^ t >>> 14) >>> 0) / 4294967296; };
@@ -1322,9 +1320,6 @@ function embers(cv){
 }
 if(!reduce){const go=()=>$$('canvas.embers').forEach(embers);('requestIdleCallback' in window)?requestIdleCallback(go,{timeout:1500}):setTimeout(go,600)}
 
-/* ---------- Flames in CTA ---------- */
-$('#flames').innerHTML=Array.from({length:14},(_,i)=>{const h=60+Math.abs(Math.sin(i*1.7))*80;return `<span class="flame" style="--h:${h.toFixed(0)}px;--t:${(.5+((i*37)%10)/14).toFixed(2)}s"></span>`}).join('');
-
 /* ---------- Cart state ---------- */
 let cart={},mode='retirada',placed=null;
 try{const s=JSON.parse(localStorage.getItem('bp-cart')||'{}');if(s&&typeof s==='object')for(const k in s){const q=Math.min(99,Math.floor(+s[k]||0));if(item(k)&&q>0)cart[k]=q}}catch(e){}
@@ -1350,8 +1345,7 @@ function cardHTML(m,n){return `
         <div class="title-row"><h3>${m.name}</h3><span class="price">${money(m.price)}</span></div>
         <p class="spec">${m.spec}</p>
         <p class="desc">${m.desc}</p>
-        <div class="notes" aria-label="Notas de sabor">${m.notes.map(t=>`<span>${t}</span>`).join('')}</div>
-        <p class="allerg">${m.allerg}</p>
+        <details class="info"><summary>Sabor e alérgenos</summary><div class="notes" aria-label="Notas de sabor">${m.notes.map(t=>`<span>${t}</span>`).join('')}</div><p class="allerg">${m.allerg}</p></details>
         ${m.cat==='burgers'?`<button class="opts-toggle" type="button" aria-expanded="${comboOn.has(m.id)}">Transformar em combo</button><div class="opts"><label class="combo"><input type="checkbox" id="combo-${m.id}" data-combo="${m.id}"${comboOn.has(m.id)?' checked':''}><span>Fazer combo com <b>Batata Rústica + Limonada Suíça</b> por <b>+ ${money(COMBO)}</b> <em>(economize ${money(COMBO_SAVE)})</em></span></label></div>`:''}
         <div class="add-row" data-row="${m.id}">${rowHTML(m)}</div>
       </div>
@@ -1462,7 +1456,7 @@ grid.addEventListener('click',e=>{
 
 /* ---------- Comanda + pedido pelo WhatsApp ---------- */
 /* Troque pelo número de WhatsApp da loja: código do país + DDD + número, só dígitos. */
-const WHATSAPP='5511930621240';
+const WHATSAPP=LOJA.whatsapp;
 const ticket=$('#ticket'),waBtn=$('#waBtn'),seg=$('#seg'),free=$('#free'),checkout=$('#checkout'),coMsg=$('#checkoutMsg');
 const cName=$('#cName'),cAddr=$('#cAddr'),cPay=$('#cPay'),cNote=$('#cNote'),addrField=$('#addrField');
 const ticketNo='BP-'+String(400+Math.floor(Math.random()*500)).padStart(4,'0');
@@ -1553,51 +1547,6 @@ $('#toTop').addEventListener('click',()=>scrollTo({top:0,behavior:reduce?'auto':
 const toastEl=$('#toast');let tt;
 function toast(html){toastEl.innerHTML=html;toastEl.classList.add('show');clearTimeout(tt);tt=setTimeout(()=>toastEl.classList.remove('show'),1900)}
 
-/* ---------- Anatomia: exploded view controlled by the visitor (button, slider or tap) ---------- */
-const anat=$('#anatomia'),fig=$('#anatFig'),anatStage=$('#anatStage'),cap=$('#anatCap'),range=$('#anatRange'),explodeBtn=$('#explodeBtn');
-const anatLayers=['bunBottom','sauce','lettuce','tomato','patty','cheese','pickles','onion','bunTop'];
-const anatInfo=[['Brioche','Tostado na manteiga noisette'],['Molho Brasa','Receita da casa, levemente defumada'],['Alface americana','Crocante, lavada no dia'],['Tomate italiano','Fatiado na hora'],['Blend 180 g','Acém e peito moídos às 6h'],['Cheddar inglês','Maturado por 12 meses'],['Picles da casa','5 dias de salmoura'],['Cebola roxa','Fatiada fina'],['Brioche com gergelim','Assado às 4h']];
-const SPREAD=34;
-const A=burgerSVG(anatLayers,77,SPREAD);
-fig.innerHTML=A.html;
-const vbW=328,vbH=A.H+A.extra,vbY=-A.extra/2;
-const aGroups=[...fig.querySelectorAll('.layer')];
-const labels=anatInfo.map(([b,s])=>{const el=document.createElement('div');el.className='lbl';el.innerHTML=`<span><b>${b}</b><small>${s}</small></span>`;anatStage.appendChild(el);return el});
-let figW=0,figH=0,figX=0,narrow=false,anatP=0,anatRaf=0;
-function layoutAnat(){
-  const sw=anatStage.clientWidth;narrow=sw<700;
-  const maxW=sw*(narrow?.54:.34);
-  if(narrow)anatStage.style.height=Math.round(maxW*vbH/vbW+12)+'px';else anatStage.style.height='';
-  const sh=anatStage.clientHeight;
-  figH=Math.min(sh*.96,maxW*vbH/vbW);figW=figH*vbW/vbH;
-  figX=narrow?0:(sw-figW)/2;
-  fig.style.width=figW+'px';fig.style.height=figH+'px';fig.style.left=figX+'px';fig.style.top=((sh-figH)/2)+'px';
-  labels.forEach((el,i)=>{const right=narrow||i%2===0;el.className='lbl '+(right?'r':'l');
-    if(right){const x=figX+figW*.9;el.style.left=x+'px';el.style.right='auto';el.style.maxWidth=Math.max(110,sw-x-4)+'px'}
-    else{el.style.right=(sw-figX-figW*.1)+'px';el.style.left='auto';el.style.maxWidth=Math.max(110,figX+figW*.1-4)+'px'}});
-  drawAnat();
-}
-function drawAnat(){
-  const n=anatLayers.length,p=anatP,e=p<.5?4*p*p*p:1-Math.pow(-2*p+2,3)/2;
-  const sh=anatStage.clientHeight,top0=(sh-figH)/2,scale=figH/vbH;
-  aGroups.forEach((g,i)=>{const off=-(i-(n-1)/2)*SPREAD*e;g.setAttribute('transform',`translate(0 ${off.toFixed(2)})`);
-    const el=labels[i];el.style.top=((A.centers[i]+off-vbY)*scale+top0)+'px';
-    el.style.opacity=Math.max(0,Math.min(1,(e-.45)*2.2)).toFixed(2)});
-  range.value=Math.round(p*100);
-  const open=p>.5;explodeBtn.setAttribute('aria-pressed',open);explodeBtn.querySelector('span').textContent=open?'Montar o burger':'Desmontar o burger';
-  cap.textContent=p<.05?'Toque no botão, no burger ou arraste o controle':p>.95?'9 camadas, montadas sempre na mesma ordem':'Cada camada no seu lugar…';
-}
-function animateAnat(to){
-  cancelAnimationFrame(anatRaf);if(reduce){anatP=to;drawAnat();return}
-  const from=anatP,t0=performance.now(),d=900*Math.abs(to-from)+200;
-  const step=t=>{const k=Math.min(1,(t-t0)/d);anatP=from+(to-from)*k;drawAnat();if(k<1)anatRaf=requestAnimationFrame(step)};anatRaf=requestAnimationFrame(step);
-}
-explodeBtn.addEventListener('click',()=>animateAnat(anatP>.5?0:1));
-fig.addEventListener('click',()=>animateAnat(anatP>.5?0:1));
-range.addEventListener('input',()=>{cancelAnimationFrame(anatRaf);anatP=range.value/100;drawAnat()});
-layoutAnat();addEventListener('resize',layoutAnat);
-document.fonts&&document.fonts.ready.then(layoutAnat);
-
 /* ---------- Steps rail fill ---------- */
 const steps=$('#steps');
 function onScrollSteps(){if(reduce)return;const r=steps.getBoundingClientRect();const p=Math.max(0,Math.min(1,(innerHeight*.75-r.top)/r.height));steps.style.setProperty('--fill',p.toFixed(3))}
@@ -1616,22 +1565,19 @@ onScroll();
 /* ---------- Reviews carousel ---------- */
 const star=(f,i)=>`<svg viewBox="0 0 24 24" style="--s:${i}" aria-hidden="true"><path d="M12 2.8l2.8 5.9 6.4.8-4.7 4.4 1.2 6.4L12 17.2l-5.7 3.1 1.2-6.4-4.7-4.4 6.4-.8z" fill="${f?'var(--gold)':'var(--line)'}"/></svg>`;
 const stars=n=>`<div class="stars" role="img" aria-label="${n} de 5 estrelas">${[1,2,3,4,5].map(i=>star(i<=n,i)).join('')}</div>`;
-$('#sumStars').innerHTML=stars(5);
-const REV=[
-  {n:5,q:'O Smash Duplo tem aquelas bordinhas crocantes que eu só achava em lanchonete de estrada nos EUA. Melhor burger de São Paulo, e olha que eu procuro há anos.',who:'Mariana T.',what:'Smash Duplo · Vila Madalena',item:'smash',c:'#CF4E1A'},
-  {n:5,q:'Dá pra sentir que a carne foi moída no mesmo dia. O Brasa Clássico é simples, bem temperado e o pão aguenta até a última mordida.',who:'Diego O.',what:'Brasa Clássico · cliente desde 2019',item:'classico',c:'#8A5C38'},
-  {n:4,q:'Vim pelo burger e fiquei pela Batata Brasa. O shake de doce de leite é perigoso. Única reclamação: a fila de sexta, o que já diz tudo.',who:'Camila R.',what:'Batata Brasa + Shake de Doce de Leite',item:'docedeleite',c:'#4C7A2A'},
-  {n:5,q:'Sou vegetariana e normalmente a opção sem carne é um improviso triste. O Horta é ótimo de verdade: suculento, defumado e não desmancha.',who:'Juliana M.',what:'Horta',item:'horta',c:'#7A3030'},
-  {n:5,q:'Pedi no intervalo do almoço e estava pronto em doze minutos, quentinho. O Fogo na Chapa tem picância de verdade. Virei cliente.',who:'Rafael S.',what:'Fogo na Chapa · Retirada',item:'fogo',c:'#B8860B'}
-];
+/* AVALIAÇÕES: coloque aqui só avaliações reais de clientes (Google, iFood, Instagram), com autorização.
+   Formato: {n:5, q:'texto da avaliação', who:'Nome S.', what:'O que pediu', item:'id do item do cardápio', c:'#CF4E1A'}
+   Com a lista vazia, a seção de avaliações não aparece no site. */
+const REV=[];
+if(!REV.length){$('#avaliacoes')?.remove()}else{
 const track=$('#track'),dots=$('#dots'),car=$('#carousel');const DUR=6500;
 track.innerHTML=REV.map((r,i)=>`<div class="slide" role="group" aria-roledescription="slide" aria-label="${i+1} de ${REV.length}"><div class="slide-main"><span class="q" aria-hidden="true">“</span>${stars(r.n)}<blockquote>${r.q}</blockquote><div class="who"><span class="avatar" style="background:${r.c}">${r.who[0]}</span><div><b>${r.who}</b><span>${r.what}</span></div></div></div><div class="slide-side">${art(byId[r.item])}<span>Pediu: ${byId[r.item].name}</span></div></div>`).join('');
 dots.innerHTML=REV.map((_,i)=>`<button class="dot" style="--dur:${DUR}ms" aria-label="Mostrar avaliação ${i+1}"><i></i></button>`).join('');
 const slides=[...track.children],dotEls=[...dots.children];let idx=0,timer=null;
 function go(i){idx=(i+REV.length)%REV.length;track.style.transform=`translateX(-${idx*100}%)`;
   slides.forEach((s,k)=>{s.classList.toggle('active',k===idx);s.setAttribute('aria-hidden',k!==idx)});
-  dotEls.forEach((d,k)=>{d.classList.remove('on');d.classList.toggle('done',k<idx);d.setAttribute('aria-current',k===idx)});
-  void dots.offsetWidth;if(!reduce)dotEls[idx].classList.add('on');else dotEls[idx].classList.add('done')}
+  dotEls.forEach((d,k)=>{d.classList.remove('on');d.classList.toggle('past',k<idx);d.setAttribute('aria-current',k===idx)});
+  void dots.offsetWidth;if(!reduce)dotEls[idx].classList.add('on');else dotEls[idx].classList.add('past')}
 function restart(){clearTimeout(timer);if(!reduce)schedule()}
 let remaining=DUR,startedAt=0,paused=false;
 function schedule(){remaining=DUR;startedAt=Date.now();timer=setTimeout(()=>{go(idx+1);schedule()},remaining)}
@@ -1644,12 +1590,20 @@ dotEls.forEach((d,k)=>d.onclick=()=>{go(k);paused=false;car.classList.remove('pa
 car.addEventListener('mouseenter',pause);car.addEventListener('mouseleave',resume);
 let sx=null;track.addEventListener('touchstart',e=>sx=e.touches[0].clientX,{passive:true});
 track.addEventListener('touchend',e=>{if(sx==null)return;const dx=e.changedTouches[0].clientX-sx;if(Math.abs(dx)>40){go(idx+(dx<0?1:-1));restart()}sx=null});
+}
 
 /* ---------- Hours: highlight today + open now ---------- */
-(()=>{const now=new Date(),d=now.getDay(),m=now.getHours()*60+now.getMinutes();
+(()=>{const parts=Object.fromEntries(new Intl.DateTimeFormat('en-US',{timeZone:'America/Sao_Paulo',weekday:'short',hour:'2-digit',minute:'2-digit',hourCycle:'h23'}).formatToParts(new Date()).map(p=>[p.type,p.value]));
+  const d=['Sun','Mon','Tue','Wed','Thu','Fri','Sat'].indexOf(parts.weekday),m=(+parts.hour)*60+(+parts.minute);
   $$('#hours li').forEach(li=>li.classList.toggle('today',li.dataset.days.split(',').includes(String(d))));
   const H={0:[720,1320],2:[690,1380],3:[690,1380],4:[690,1380],5:[690,1440],6:[690,1440]}[d];
   const open=H&&m>=H[0]&&m<H[1];const el=$('#openNow');el.classList.toggle('closed',!open);el.querySelector('span').textContent=open?'Aberto agora':'Fechado agora';})();
+
+/* ---------- Dados da loja no rodapé ---------- */
+$$('[data-loja]').forEach(el=>{const v=LOJA[el.dataset.loja];if(v)el.textContent=v});
+$$('[data-copy-from]').forEach(b=>b.dataset.copy=LOJA[b.dataset.copyFrom]||'');
+$$('[data-social]').forEach(a=>{const k=a.dataset.social,v=k==='whatsapp'?(LOJA.whatsapp?'https://wa.me/'+LOJA.whatsapp:''):LOJA[k];
+  if(/^https:\/\//.test(v||''))a.href=v;else a.remove()});
 
 /* ---------- Copy buttons ---------- */
 $$('.copy-btn').forEach(b=>b.addEventListener('click',()=>{
@@ -1658,22 +1612,11 @@ $$('.copy-btn').forEach(b=>b.addEventListener('click',()=>{
   try{navigator.clipboard.writeText(v).then(ok,sel)}catch(e){sel()}
 }));
 
-/* ---------- Newsletter ---------- */
-const form=$('#newsForm'),msg=$('#formMsg'),em=$('#email');
-form.addEventListener('submit',e=>{e.preventDefault();const v=em.value.trim();
-  if(!/^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(v)){msg.className='form-msg err';msg.textContent='Digite um e-mail completo, como nome@email.com.';form.classList.remove('shake-x');void form.offsetWidth;form.classList.add('shake-x');em.focus();return}
-  msg.className='form-msg ok';msg.textContent=`Pronto! O próximo burger da semana vai para ${v} na quinta.`;form.reset()});
-
-/* ---------- Count-up numbers ---------- */
-const fmtN=(n,el)=>(el.dataset.prefix||'')+(el.dataset.sep?Math.round(n).toLocaleString('pt-BR'):Math.round(n))+(el.dataset.suffix||'');
-function countUp(el){const to=+el.dataset.count,t0=performance.now(),d=1600;const step=t=>{const k=Math.min(1,(t-t0)/d),e=1-Math.pow(1-k,4);el.textContent=fmtN(to*e,el);if(k<1)requestAnimationFrame(step)};requestAnimationFrame(step)}
-
 /* ---------- Reveal on scroll (visible at rest; animates only once it enters) ---------- */
 if('IntersectionObserver' in window && !reduce){
   const io=new IntersectionObserver(es=>es.forEach(en=>{if(!en.isIntersecting)return;const t=en.target;io.unobserve(t);
-    if(t.dataset.count!==undefined)countUp(t);else t.classList.add('in')}),{threshold:0});
+    t.classList.add('in')}),{threshold:0});
   $$('.reveal,.reveal-l').forEach(el=>{if(el.getBoundingClientRect().top>innerHeight)io.observe(el)});
-  $$('[data-count]').forEach(el=>{if(el.closest('.hero'))setTimeout(()=>countUp(el),900);else if(el.getBoundingClientRect().top>innerHeight)io.observe(el)});
 }
 })();
 </script>

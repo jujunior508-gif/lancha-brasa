@@ -10,13 +10,12 @@ Landing page de uma hamburgueria artesanal em Pinheiros, São Paulo.
 - **Monte o seu lanche:** escolha um pronto (Clássico, Duplo, Bacon, Picante, Vegetariano) ou toque nos 12 ingredientes; o burger se monta na tela, ganha nome automático e o preço e as calorias atualizam na hora
 - Carrinho em forma de comanda, com retirada ou entrega (grátis acima de R$ 120)
 - **Pedido pelo WhatsApp:** o cliente preenche nome, endereço, pagamento e observações, e o site abre o WhatsApp da loja com o pedido já escrito
-- Seção "Anatomia" com o burger que desmonta pelo botão, pelo controle deslizante ou tocando nele
-- Linha do tempo do preparo, carrossel de avaliações e rodapé com newsletter
+- Linha do tempo do preparo, avaliações reais (quando cadastradas) e rodapé com contato pelo WhatsApp
 - Responsiva, com tema claro e escuro, e respeita a preferência de "reduzir movimento"
 
-## Configurar o WhatsApp da loja
+## Dados da loja (WhatsApp, telefone, redes sociais)
 
-No `index.html`, procure por `const WHATSAPP=` e troque o número pelo da loja, só com dígitos, no formato código do país + DDD + número (ex.: `5511912345678`). Troque também o número que aparece no rodapé e o link `wa.me` do ícone do WhatsApp.
+No `index.html`, procure por `DADOS DA LOJA`. Ali ficam o WhatsApp (só dígitos, com 55 e DDD), o telefone, o e-mail e os endereços do Instagram, Facebook e TikTok. Rede social em branco esconde o ícone.
 
 ## Como editar o cardápio
 
@@ -31,6 +30,14 @@ No `index.html`, procure por `COMO EDITAR O CARDÁPIO`. Logo abaixo está a list
 - **Foto real:** coloque o arquivo na pasta `fotos/` e acrescente `foto:'fotos/nome.jpg'` no item (veja `fotos/LEIA-ME.md`)
 
 Os ingredientes do "Monte o seu" ficam logo abaixo, em `const ING=[`: dá para mudar o preço (`p`), as calorias (`c`) e a quantidade máxima (`max`) de cada um.
+
+## Avaliações
+
+A seção de avaliações só aparece quando houver avaliações reais. No `index.html`, procure por `AVALIAÇÕES` e coloque as avaliações dos clientes (Google, iFood, Instagram), com autorização deles.
+
+## Prévia nas redes sociais
+
+O arquivo `og.jpg` é a imagem que aparece quando alguém compartilha o link. Ela usa o endereço do GitHub Pages (`https://jujunior508-gif.github.io/lancha-brasa/`); se o site for publicado em outro endereço, troque o `og:image` no topo do `index.html`.
 
 ## Segurança
 
