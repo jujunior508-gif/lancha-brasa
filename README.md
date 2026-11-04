@@ -5,7 +5,8 @@ Landing page de uma hamburgueria artesanal em Pinheiros, São Paulo.
 ## O que tem
 
 - Topo com burger que se monta sozinho, faíscas de brasa e vapor
-- Cardápio com 24 itens em 4 categorias (burgers, porções, bebidas e sobremesas), busca, filtros (vegetariano, picante, sem glúten, para dividir) e opção de combo em todos os burgers
+- Cardápio com 24 itens no estilo dos apps de delivery: lista por categoria (burgers, porções, bebidas e sobremesas), barra de categorias fixa que acompanha a rolagem, busca, filtros (vegetariano, picante, sem glúten, para dividir), combo nos burgers e botão de quantidade (− 1 +) direto no card
+- No celular: cards compactos (foto + nome + preço) e barra fixa "Ver pedido" com o total
 - Carrinho em forma de comanda, com retirada ou entrega (grátis acima de R$ 120)
 - **Pedido pelo WhatsApp:** o cliente preenche nome, endereço, pagamento e observações, e o site abre o WhatsApp da loja com o pedido já escrito
 - Seção "Anatomia" com o burger que desmonta pelo botão, pelo controle deslizante ou tocando nele
@@ -15,6 +16,17 @@ Landing page de uma hamburgueria artesanal em Pinheiros, São Paulo.
 ## Configurar o WhatsApp da loja
 
 No `index.html`, procure por `const WHATSAPP=` e troque o número pelo da loja, só com dígitos, no formato código do país + DDD + número (ex.: `5511912345678`). Troque também o número que aparece no rodapé e o link `wa.me` do ícone do WhatsApp.
+
+## Como editar o cardápio
+
+No `index.html`, procure por `COMO EDITAR O CARDÁPIO`. Logo abaixo está a lista de itens (`const MENU=[`). Cada item é um bloco `{ ... }`:
+
+- **Preço:** `price:36.9` (com ponto, sem "R$")
+- **Nome e descrição:** `name:'...'` e `desc:'...'`
+- **Selo:** `badge:'Mais pedido'` (apague para tirar)
+- **Categoria:** `cat:'burgers'`, `'sides'`, `'drinks'` ou `'desserts'`
+- **Tirar um item:** apague o bloco inteiro dele
+- **Novo item:** copie um bloco parecido e troque o `id`
 
 ## Segurança
 

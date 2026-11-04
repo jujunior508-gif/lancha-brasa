@@ -163,8 +163,8 @@ button{font:inherit;cursor:pointer;color:inherit}
 .tabs{position:relative;display:flex;flex-wrap:wrap;gap:2px;background:var(--surface-2);padding:5px;border-radius:999px}
 .tab-ind{position:absolute;top:5px;bottom:5px;left:0;width:0;border-radius:999px;background:var(--ink);transition:transform .45s cubic-bezier(.6,0,.2,1),width .45s cubic-bezier(.6,0,.2,1);z-index:0}
 .tab{position:relative;z-index:1;border:0;background:none;color:var(--muted);font-weight:700;padding:10px 18px;border-radius:999px;transition:color .3s}
-.tab[aria-selected="true"]{color:var(--bg)}
-.tab:not([aria-selected="true"]):hover{color:var(--ink)}
+.tab[aria-current="true"]{color:var(--bg)}
+.tab:not([aria-current="true"]):hover{color:var(--ink)}
 .tab small{font-family:var(--f-mono);font-size:.7rem;opacity:.65;margin-left:2px}
 .menu-tools{display:flex;flex-wrap:wrap;align-items:center;gap:12px 16px;margin:-12px 0 28px}
 .search{flex:1 1 280px;min-width:0;display:flex;align-items:center;gap:10px;background:var(--surface);border:1px solid var(--line);border-radius:999px;padding:0 18px;color:var(--muted);transition:border-color .25s,box-shadow .25s}
@@ -190,7 +190,7 @@ button{font:inherit;cursor:pointer;color:inherit}
 .combo:has(input:checked){border-style:solid;border-color:var(--ember);background:color-mix(in srgb,var(--ember) 7%,var(--surface))}
 .combo b{color:var(--ink)}
 .combo em{font-style:normal;color:var(--herb);font-weight:600}
-@media (max-width:560px){.tabs{border-radius:16px}.tab{padding:9px 13px;font-size:.92rem}.tab-ind{display:none}.tab[aria-selected="true"]{background:var(--ink)}}
+@media (max-width:560px){.tabs{border-radius:16px}.tab{padding:9px 13px;font-size:.92rem}.tab-ind{display:none}.tab[aria-current="true"]{background:var(--ink)}}
 .grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:24px}
 @media (max-width:1000px){.grid{grid-template-columns:repeat(2,minmax(0,1fr))}}
 @media (max-width:620px){.grid{grid-template-columns:1fr}}
@@ -429,7 +429,90 @@ button{font:inherit;cursor:pointer;color:inherit}
 .done .demo{font-family:var(--f-mono);font-size:.7rem;color:var(--muted)}
 .toast{position:fixed;left:50%;bottom:calc(env(safe-area-inset-bottom,0px) + 22px);transform:translate(-50%,160%);background:var(--ink);color:var(--bg);padding:12px 20px;border-radius:999px;font-weight:600;z-index:100;transition:transform .45s cubic-bezier(.2,1.4,.4,1);max-width:calc(100% - 32px);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
 .toast.show{transform:translate(-50%,0)}
+.toast{pointer-events:none}
+.toast:not(.show){opacity:0;visibility:hidden;transition:transform .45s cubic-bezier(.2,1.4,.4,1),opacity .3s,visibility 0s .3s}
 .toast i{font-style:normal;color:var(--gold)}
+
+
+/* ===== Cardápio: barra de categorias fixa, grupos, quantidade ===== */
+.menu-nav{position:sticky;top:calc(env(safe-area-inset-top,0px) + var(--hdr));z-index:30;padding-block:10px;margin-bottom:8px;background:var(--bg);box-shadow:0 0 0 100vmax var(--bg);clip-path:inset(0 -100vmax);transition:box-shadow .3s}
+.menu-nav.stuck{box-shadow:0 0 0 100vmax var(--bg),0 12px 18px -16px rgba(0,0,0,.45)}
+.menu-nav .tabs{display:inline-flex;max-width:100%;flex-wrap:nowrap;overflow-x:auto;scrollbar-width:none;-webkit-overflow-scrolling:touch}
+.menu-nav .tabs::-webkit-scrollbar{display:none}
+.tab{flex:none;white-space:nowrap}
+.tab:disabled{opacity:.35;cursor:default}
+.cat-group{scroll-margin-top:140px}
+.cat-group + .cat-group{margin-top:48px}
+.cat-title{display:flex;align-items:baseline;gap:10px;font-size:clamp(1.9rem,4vw,2.6rem);margin:18px 0 18px}
+.cat-title small{font-family:var(--f-mono);font-size:.8rem;font-weight:500;color:var(--muted)}
+.add .add-price{margin-left:auto;font-family:var(--f-mono);font-weight:600;opacity:.8}
+.add{justify-content:flex-start}
+.stepper{flex:none;display:inline-flex;align-items:center;background:var(--ember);color:var(--ember-ink);border-radius:999px;padding:4px;animation:stepIn .35s cubic-bezier(.2,1.5,.4,1)}
+@keyframes stepIn{from{transform:scale(.8);opacity:0}}
+.stepper button{width:40px;height:40px;border-radius:50%;border:0;background:rgba(255,255,255,.18);color:inherit;font-size:1.3rem;font-weight:700;display:grid;place-items:center;line-height:1;transition:background .2s,transform .12s}
+.stepper button:hover{background:rgba(255,255,255,.3)}
+.stepper button:active{transform:scale(.88)}
+.stepper .q{min-width:2.4ch;text-align:center;font-family:var(--f-mono);font-weight:600;font-size:1.05rem}
+.q.pop{animation:pop .3s cubic-bezier(.3,1.8,.5,1)}
+@keyframes pop{50%{transform:scale(1.45)}}
+.row-total{margin-left:auto;font-family:var(--f-mono);font-weight:600;color:var(--ember)}
+.opts-toggle{display:none}
+.mbar{display:none}
+@media (max-width:620px){
+  .sec{padding-block:72px}
+  .sec-head{margin-bottom:22px}
+  .sec-head h2,.h2{font-size:clamp(2.3rem,11vw,3rem)}
+  .hero-grid{gap:10px}
+  .stage-inner{max-width:290px}
+  .hero h1{font-size:clamp(2.9rem,15vw,4rem)}
+  .lede{font-size:1.02rem}
+  .stats{gap:10px 24px}
+  .stat b{font-size:1.7rem}
+  .menu-tools{margin:-6px 0 6px;gap:10px}
+  .search{flex-basis:100%}
+  .chips{flex-wrap:nowrap;overflow-x:auto;scrollbar-width:none;width:100%;padding:2px}
+  .chips::-webkit-scrollbar{display:none}
+  .chip{flex:none;white-space:nowrap}
+  .menu-nav{padding-block:8px}
+  .menu-nav .tabs{display:flex;border-radius:999px}
+  .tab{padding:9px 14px;font-size:.92rem}
+  .cat-group + .cat-group{margin-top:32px}
+  .cat-title{margin:10px 0 12px}
+  .grid{gap:12px}
+  .card{display:grid;grid-template-columns:124px minmax(0,1fr);align-items:start;border-radius:14px}
+  .card:hover{transform:none;box-shadow:none;border-color:var(--line)}
+  .card .pic{aspect-ratio:1;width:112px;height:112px;margin:12px 0 0 12px;border-radius:12px}
+  .card .pic svg{width:86%;height:86%}
+  .card .badge{top:6px;left:6px;font-size:.56rem;padding:3px 7px;letter-spacing:.06em}
+  .card .kcal,.card .notes,.card .allerg,.card .spec{display:none}
+  .card .body{padding:12px 14px 14px 12px;gap:6px}
+  .card .title-row{flex-direction:column;align-items:flex-start;gap:2px}
+  .card h3{font-size:1.4rem}
+  .card .price{font-size:.95rem}
+  .card .desc{font-size:.86rem;line-height:1.45;display:-webkit-box;-webkit-line-clamp:3;-webkit-box-orient:vertical;overflow:hidden}
+  .card .add-row{padding-top:4px;gap:8px}
+  .card .add{padding:10px 14px;font-size:.88rem;white-space:nowrap}
+  .stepper button{width:36px;height:36px}
+  .opts-toggle{display:flex;align-items:center;justify-content:space-between;width:100%;background:none;border:1px dashed var(--line);border-radius:10px;padding:8px 10px;font-size:.8rem;font-weight:700;color:var(--ink)}
+  .opts-toggle::after{content:"+";font-family:var(--f-mono);color:var(--ember);transition:transform .3s}
+  .card.expanded .opts-toggle::after{transform:rotate(45deg)}
+  .card .opts{display:none}
+  .card.expanded .opts{display:block;animation:fadeUp .3s ease}
+  .card .combo{font-size:.8rem;padding:8px 10px}
+  .slide blockquote{font-size:1.1rem}
+  .rating-sum b{font-size:2.6rem}
+  .cta{padding-block:80px 0}
+  .flames{height:100px;margin-top:40px}
+  .mbar{display:flex;position:fixed;z-index:70;left:max(12px,env(safe-area-inset-left,0px));right:max(12px,env(safe-area-inset-right,0px));bottom:calc(env(safe-area-inset-bottom,0px) + 12px);align-items:center;gap:12px;background:var(--ink);color:var(--bg);border:0;border-radius:16px;padding:14px 18px;font-weight:700;font-size:1rem;box-shadow:0 14px 34px -10px rgba(0,0,0,.55);animation:mbarIn .45s cubic-bezier(.2,1.3,.4,1)}
+  .mbar[hidden]{display:none}
+  .mbar.bump{animation:mbarBump .4s cubic-bezier(.3,1.6,.5,1)}
+  .mbar b{margin-left:auto;font-family:var(--f-mono);font-weight:600;color:var(--gold)}
+  .mbar-count{display:grid;place-items:center;min-width:26px;height:26px;border-radius:999px;background:var(--gold);color:#1A0F08;font-family:var(--f-mono);font-size:.82rem}
+  body.has-mbar .toast{bottom:calc(env(safe-area-inset-bottom,0px) + 84px)}
+  body.has-mbar .site-foot{padding-bottom:76px}
+}
+@keyframes mbarIn{from{transform:translateY(120%)}}
+@keyframes mbarBump{40%{transform:scale(1.04)}}
 
 /* Scroll reveal: always visible at rest; animates only when it scrolls into view */
 .reveal.in{animation:rise .9s cubic-bezier(.2,.9,.2,1) both;animation-delay:var(--d,0s)}
@@ -556,15 +639,7 @@ button{font:inherit;cursor:pointer;color:inherit}
       <div>
         <p class="eyebrow">Cardápio</p>
         <h2>Escolha o seu.</h2>
-        <p class="sub">Todos os burgers saem ao ponto, a menos que você peça diferente. Passe o mouse sobre um burger para ver o que vai dentro.</p>
-      </div>
-      <div class="tabs" role="tablist" aria-label="Categorias do cardápio" id="tabs">
-        <span class="tab-ind" id="tabInd" aria-hidden="true"></span>
-        <button class="tab" role="tab" data-cat="all" aria-selected="false">Todos <small></small></button>
-        <button class="tab" role="tab" data-cat="burgers" aria-selected="true">Burgers <small></small></button>
-        <button class="tab" role="tab" data-cat="sides" aria-selected="false">Porções <small></small></button>
-        <button class="tab" role="tab" data-cat="drinks" aria-selected="false">Bebidas <small></small></button>
-        <button class="tab" role="tab" data-cat="desserts" aria-selected="false">Sobremesas <small></small></button>
+        <p class="sub">Todos os burgers saem ao ponto, a menos que você peça diferente. Toque numa categoria para ir direto a ela.</p>
       </div>
     </div>
     <div class="menu-tools">
@@ -581,7 +656,16 @@ button{font:inherit;cursor:pointer;color:inherit}
       </div>
       <p class="result-count" id="resultCount" aria-live="polite"></p>
     </div>
-    <div class="grid" id="grid" role="tabpanel"></div>
+    <nav class="menu-nav" id="menuNav" aria-label="Categorias do cardápio">
+      <div class="tabs" id="tabs">
+        <span class="tab-ind" id="tabInd" aria-hidden="true"></span>
+        <button class="tab" data-cat="burgers" aria-current="true">Burgers <small></small></button>
+        <button class="tab" data-cat="sides" aria-current="false">Porções <small></small></button>
+        <button class="tab" data-cat="drinks" aria-current="false">Bebidas <small></small></button>
+        <button class="tab" data-cat="desserts" aria-current="false">Sobremesas <small></small></button>
+      </div>
+    </nav>
+    <div class="menu-list" id="grid"></div>
   </div>
 </section>
 
@@ -740,6 +824,8 @@ button{font:inherit;cursor:pointer;color:inherit}
     Pedir pelo WhatsApp</a>
   <p class="wa-note">O pedido é enviado pelo WhatsApp da loja, que confirma o tempo e o pagamento com você.</p>
 </aside>
+
+<button class="mbar" id="mbar" type="button" hidden><span class="mbar-count" id="mbarCount">0</span><span>Ver pedido</span><b id="mbarTotal">R$ 0,00</b></button>
 
 <div class="toast" id="toast" role="status" aria-live="polite"></div>
 
@@ -954,6 +1040,18 @@ function pudim(){
 
 /* ---------- Menu data ---------- */
 const A_BUN='Contém glúten, lactose, ovo e gergelim.';
+/* =====================================================================
+   COMO EDITAR O CARDÁPIO
+   Cada item abaixo é um bloco { ... }. Para mudar:
+   - preço:      price:36.9        (use ponto, sem "R$")
+   - nome:       name:'Brasa Clássico'
+   - descrição:  desc:'...'
+   - selo:       badge:'Mais pedido'  (apague a linha para tirar o selo)
+   - categoria:  cat:'burgers' | 'sides' | 'drinks' | 'desserts'
+   - filtros:    tags:['veg','hot','gf','share']  (vegetariano, picante, sem glúten, para dividir)
+   Para tirar um item do cardápio, apague o bloco inteiro dele.
+   Para criar um item novo, copie um bloco parecido e troque o id (sem espaços nem acentos).
+   ===================================================================== */
 const MENU=[
   {id:'classico',cat:'burgers',name:'Brasa Clássico',price:36.9,kcal:780,spec:'Blend 180 g · cheddar inglês · brioche',badge:'Mais pedido',tags:[],
    desc:'Nosso blend com crosta bem marcada, cheddar inglês maturado, alface americana, tomate italiano, picles da casa e molho Brasa.',notes:['Suculento','Equilibrado','Clássico'],allerg:A_BUN,
@@ -1073,22 +1171,17 @@ const subtotal=()=>Object.keys(cart).reduce((a,id)=>a+item(id).price*cart[id],0)
 const inCart=id=>(cart[id]||0)+(cart[id+'|combo']||0);
 const FEE=7.9,FREE_AT=120;
 
-/* ---------- Menu render ---------- */
-const grid=$('#grid'),tabInd=$('#tabInd');let currentCat='burgers',query='';const activeTags=new Set(),comboOn=new Set();
-const CAT_LABEL={all:'itens',burgers:'burgers',sides:'porções',drinks:'bebidas',desserts:'sobremesas'};
+/* ---------- Menu render: lista por categoria + barra fixa ---------- */
+const grid=$('#grid'),tabInd=$('#tabInd'),tabsEl=$('#tabs'),menuNav=$('#menuNav');let query='',activeCat='burgers';const activeTags=new Set(),comboOn=new Set();
+const CATS=[['burgers','Burgers'],['sides','Porções'],['drinks','Bebidas'],['desserts','Sobremesas']];
 const matches=m=>{if(activeTags.size&&![...activeTags].every(t=>m.tags.includes(t)))return false;
   if(!query)return true;return norm([m.name,m.desc,m.spec,m.notes.join(' '),m.badge||''].join(' ')).includes(query)};
-function renderMenu(animate){
-  const pool=MENU.filter(matches);
-  $$('.tab').forEach(t=>{const c=t.dataset.cat;t.querySelector('small').textContent=pool.filter(m=>c==='all'||m.cat===c).length});
-  moveInd();
-  const items=pool.filter(m=>currentCat==='all'||m.cat===currentCat);
-  const filtered=query||activeTags.size;
-  $('#resultCount').textContent=filtered?`${items.length} ${items.length===1?'item encontrado':'itens encontrados'}${query?` para “${$('#menuSearch').value.trim()}”`:''}`:`${items.length} ${CAT_LABEL[currentCat]} no cardápio`;
-  if(!items.length){grid.innerHTML=`<div class="no-results"><b>Nada por aqui</b><p>Nenhum item ${currentCat==='all'?'':'desta categoria '}combina com a busca e os filtros escolhidos.</p><button id="clearFilters">Limpar busca e filtros</button></div>`;
-    $('#clearFilters').onclick=()=>{query='';$('#menuSearch').value='';activeTags.clear();$$('.chip').forEach(c=>c.setAttribute('aria-pressed','false'));renderMenu(true)};return}
-  grid.innerHTML=items.map((m,n)=>`
-    <article class="card${animate?' enter':''}" style="--n:${n}">
+const keyFor=id=>comboOn.has(id)?id+'|combo':id;
+function rowHTML(m){const k=keyFor(m.id),q=cart[k]||0,price=item(k).price;
+  if(!q)return `<button class="add" data-add="${m.id}" aria-label="Adicionar ${m.name} ao pedido"><svg class="ico" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" aria-hidden="true"><path d="M12 5v14M5 12h14"/></svg><span>Adicionar</span><b class="add-price">${money(price)}</b></button>`;
+  return `<div class="stepper" role="group" aria-label="Quantidade de ${m.name}"><button data-step="-1" data-id="${m.id}" aria-label="Tirar um">${q===1?'<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" aria-hidden="true"><path d="M5 7h14M10 7V4h4v3M7 7l1 13h8l1-13"/></svg>':'−'}</button><span class="q" aria-live="polite">${q}</span><button data-step="1" data-id="${m.id}" aria-label="Pôr mais um">+</button></div><b class="row-total">${money(price*q)}</b>`}
+function cardHTML(m,n){return `
+    <article class="card${comboOn.has(m.id)?' expanded':''}" style="--n:${n%3}" data-card="${m.id}">
       <div class="pic">${m.badge?`<span class="badge${m.veg?' veg':''}${m.hot?' hot':''}">${m.badge}</span>`:''}<span class="kcal">≈ ${m.kcal} kcal</span>${art(m)}</div>
       <div class="body">
         <div class="title-row"><h3>${m.name}</h3><span class="price">${money(m.price)}</span></div>
@@ -1096,24 +1189,44 @@ function renderMenu(animate){
         <p class="desc">${m.desc}</p>
         <div class="notes" aria-label="Notas de sabor">${m.notes.map(t=>`<span>${t}</span>`).join('')}</div>
         <p class="allerg">${m.allerg}</p>
-        ${m.cat==='burgers'?`<label class="combo"><input type="checkbox" id="combo-${m.id}" data-combo="${m.id}"${comboOn.has(m.id)?' checked':''}><span>Fazer combo com <b>Batata Rústica + Limonada Suíça</b> por <b>+ ${money(COMBO)}</b> <em>(economize ${money(COMBO_SAVE)})</em></span></label>`:''}
-        <div class="add-row">
-          <button class="add" data-add="${m.id}" aria-label="Adicionar ${m.name} ao pedido"><svg class="ico" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" aria-hidden="true"><path d="M12 5v14M5 12h14"/></svg><span>Adicionar</span></button>
-          <span class="in-cart" data-in="${m.id}">${inCart(m.id)?inCart(m.id)+' no pedido':''}</span>
-        </div>
+        ${m.cat==='burgers'?`<button class="opts-toggle" type="button" aria-expanded="${comboOn.has(m.id)}">Transformar em combo</button><div class="opts"><label class="combo"><input type="checkbox" id="combo-${m.id}" data-combo="${m.id}"${comboOn.has(m.id)?' checked':''}><span>Fazer combo com <b>Batata Rústica + Limonada Suíça</b> por <b>+ ${money(COMBO)}</b> <em>(economize ${money(COMBO_SAVE)})</em></span></label></div>`:''}
+        <div class="add-row" data-row="${m.id}">${rowHTML(m)}</div>
       </div>
-    </article>`).join('');
+    </article>`}
+function renderMenu(animate){
+  const pool=MENU.filter(matches),filtered=query||activeTags.size;
+  $$('.tab').forEach(t=>{const n=pool.filter(m=>m.cat===t.dataset.cat).length;t.querySelector('small').textContent=n;t.disabled=!n});
+  $('#resultCount').textContent=filtered?`${pool.length} ${pool.length===1?'item encontrado':'itens encontrados'}${query?` para “${$('#menuSearch').value.trim()}”`:''}`:`${pool.length} itens no cardápio`;
+  if(!pool.length){grid.innerHTML=`<div class="no-results"><b>Nada por aqui</b><p>Nenhum item combina com a busca e os filtros escolhidos.</p><button id="clearFilters">Limpar busca e filtros</button></div>`;
+    $('#clearFilters').onclick=()=>{query='';$('#menuSearch').value='';activeTags.clear();$$('.chip').forEach(c=>c.setAttribute('aria-pressed','false'));renderMenu(true)};return}
+  grid.innerHTML=CATS.map(([c,label])=>{const its=pool.filter(m=>m.cat===c);if(!its.length)return '';
+    return `<section class="cat-group" id="cat-${c}" data-cat="${c}" aria-label="${label}"><h3 class="cat-title">${label} <small>${its.length}</small></h3><div class="grid">${its.map(cardHTML).join('')}</div></section>`}).join('');
+  if(animate&&!reduce)$$('#grid .card').forEach((c,i)=>{if(c.getBoundingClientRect().top<innerHeight){c.style.setProperty('--n',i%6);c.classList.add('enter')}});
+  watchCards();spyMenu(true);
 }
+function updateRows(){$$('[data-row]').forEach(r=>{const m=byId[r.dataset.row];if(m)r.innerHTML=rowHTML(m)})}
+function moveInd(){const t=$('.tab[aria-current="true"]');if(!t)return;tabInd.style.width=t.offsetWidth+'px';tabInd.style.transform=`translateX(${t.offsetLeft}px)`}
+function setActive(cat,scrollTab){if(cat===activeCat&&!scrollTab)return;activeCat=cat;
+  $$('.tab').forEach(x=>x.setAttribute('aria-current',x.dataset.cat===cat));moveInd();
+  const t=$(`.tab[data-cat="${cat}"]`);if(t&&tabsEl.scrollWidth>tabsEl.clientWidth)tabsEl.scrollTo({left:t.offsetLeft-16,behavior:reduce?'auto':'smooth'})}
+const navOffset=()=>(parseFloat(getComputedStyle(document.documentElement).getPropertyValue('--hdr'))||68)+menuNav.offsetHeight+8;
+function spyMenu(force){const groups=$$('.cat-group');if(!groups.length)return;let cur=groups[0].dataset.cat;
+  groups.forEach(g=>{if(g.getBoundingClientRect().top<=navOffset()+40)cur=g.dataset.cat});
+  const r=grid.getBoundingClientRect();menuNav.classList.toggle('stuck',r.top<navOffset()&&r.bottom>navOffset());
+  if(force||cur!==activeCat)setActive(cur,true)}
+$$('.tab').forEach(t=>t.addEventListener('click',()=>{const g=$('#cat-'+t.dataset.cat);if(!g)return;
+  setActive(t.dataset.cat,true);scrollTo({top:g.getBoundingClientRect().top+scrollY-navOffset()+4,behavior:reduce?'auto':'smooth'})}));
+let cardIO=null;
+function watchCards(){if(reduce||!('IntersectionObserver' in window))return;cardIO&&cardIO.disconnect();
+  cardIO=new IntersectionObserver(es=>es.forEach(en=>{if(en.isIntersecting){en.target.classList.add('enter');cardIO.unobserve(en.target)}}),{rootMargin:'0px 0px -6% 0px'});
+  $$('#grid .card').forEach(c=>{if(c.getBoundingClientRect().top>innerHeight)cardIO.observe(c)})}
 renderMenu(false);
-function moveInd(){const t=$('.tab[aria-selected="true"]');if(!t)return;tabInd.style.width=t.offsetWidth+'px';tabInd.style.transform=`translateX(${t.offsetLeft}px)`}
-$$('.tab').forEach(t=>t.addEventListener('click',()=>{
-  $$('.tab').forEach(x=>x.setAttribute('aria-selected',x===t?'true':'false'));moveInd();
-  currentCat=t.dataset.cat;renderMenu(!reduce);
-}));
 moveInd();addEventListener('resize',moveInd);document.fonts&&document.fonts.ready.then(moveInd);
 let qt;$('#menuSearch').addEventListener('input',e=>{clearTimeout(qt);qt=setTimeout(()=>{query=norm(e.target.value.trim());renderMenu(!reduce)},180)});
 $$('.chip').forEach(c=>c.addEventListener('click',()=>{const t=c.dataset.tag,on=!activeTags.has(t);on?activeTags.add(t):activeTags.delete(t);c.setAttribute('aria-pressed',on);renderMenu(!reduce)}));
-grid.addEventListener('change',e=>{const c=e.target.closest('[data-combo]');if(c)c.checked?comboOn.add(c.dataset.combo):comboOn.delete(c.dataset.combo)});
+grid.addEventListener('change',e=>{const c=e.target.closest('[data-combo]');if(!c)return;const id=c.dataset.combo;c.checked?comboOn.add(id):comboOn.delete(id);
+  const r=$(`[data-row="${id}"]`);if(r)r.innerHTML=rowHTML(byId[id])});
+grid.addEventListener('click',e=>{const t=e.target.closest('.opts-toggle');if(!t)return;const c=t.closest('.card');const on=c.classList.toggle('expanded');t.setAttribute('aria-expanded',on)});
 
 /* 3D tilt on cards */
 if(finePointer&&!reduce){
@@ -1124,13 +1237,16 @@ if(finePointer&&!reduce){
 
 /* Add to cart + flying item */
 const cartBtn=$('#openCart'),countEl=$('#count');
+const buzz=()=>{try{navigator.vibrate&&navigator.vibrate(12)}catch(e){}};
 grid.addEventListener('click',e=>{
+  const st=e.target.closest('[data-step]');
+  if(st){const id=st.dataset.id,k=keyFor(id);if(!item(k))return;const q=(cart[k]||0)+(+st.dataset.step);
+    if(q<=0)delete cart[k];else cart[k]=Math.min(99,q);placed=null;buzz();sync(true);
+    const r=$(`[data-row="${id}"] .q`);if(r&&!reduce){r.classList.remove('pop');void r.offsetWidth;r.classList.add('pop')}return}
   const b=e.target.closest('[data-add]');if(!b)return;
-  const id=b.dataset.add,key=comboOn.has(id)?id+'|combo':id;cart[key]=Math.min(99,(cart[key]||0)+1);placed=null;
-  b.classList.add('added');b.querySelector('span').textContent='Adicionado';
-  setTimeout(()=>{b.classList.remove('added');b.querySelector('span').textContent='Adicionar'},1200);
+  const id=b.dataset.add,key=keyFor(id);if(!item(key))return;cart[key]=Math.min(99,(cart[key]||0)+1);placed=null;buzz();
   const land=()=>{sync(true);cartBtn.classList.remove('shake');void cartBtn.offsetWidth;cartBtn.classList.add('shake')};
-  const pic=b.closest('.card').querySelector('.pic');
+  const pic=b.closest('.card').querySelector('.pic');updateRows();
   if(reduce||!pic||!pic.animate){land();toast(`<i>+1</i> ${item(key).name}`);return}
   const a=pic.getBoundingClientRect(),z=cartBtn.getBoundingClientRect();
   const fl=document.createElement('div');fl.className='flyer';fl.innerHTML=art(byId[id]);document.body.appendChild(fl);
@@ -1204,16 +1320,19 @@ waBtn.addEventListener('click',e=>{
 function sync(bump){
   save();countEl.textContent=qtyTotal();
   if(bump&&!reduce){countEl.classList.remove('bump');void countEl.offsetWidth;countEl.classList.add('bump')}
-  $$('[data-in]').forEach(s=>{const q=inCart(s.dataset.in);s.textContent=q?q+' no pedido':''});
-  renderTicket();
+  updateRows();renderTicket();updateMbar(bump);
 }
+let lastTotal=0;
+function updateMbar(bump){const mb=$('#mbar');if(!mb)return;const q=qtyTotal(),open=$('#drawer')?.classList.contains('open'),total=fees().total;
+  mb.hidden=!q||open;document.body.classList.toggle('has-mbar',!mb.hidden);$('#mbarCount').textContent=q;$('#mbarTotal').textContent=money(total);
+  if(bump&&total!==lastTotal&&!reduce){mb.classList.remove('bump');void mb.offsetWidth;mb.classList.add('bump')}lastTotal=total}
 sync(false);
 
 /* Drawer */
 const drawer=$('#drawer'),scrim=$('#scrim');let lastFocus=null;
-const openCart=()=>{lastFocus=document.activeElement;renderTicket();drawer.classList.add('open');scrim.classList.add('show');drawer.setAttribute('aria-hidden','false');$('#closeCart').focus()};
-const closeCart=()=>{drawer.classList.remove('open');scrim.classList.remove('show');drawer.setAttribute('aria-hidden','true');lastFocus&&lastFocus.focus()};
-cartBtn.addEventListener('click',openCart);$('#closeCart').addEventListener('click',closeCart);scrim.addEventListener('click',closeCart);
+const openCart=()=>{lastFocus=document.activeElement;renderTicket();drawer.classList.add('open');updateMbar();scrim.classList.add('show');drawer.setAttribute('aria-hidden','false');$('#closeCart').focus()};
+const closeCart=()=>{drawer.classList.remove('open');updateMbar();scrim.classList.remove('show');drawer.setAttribute('aria-hidden','true');lastFocus&&lastFocus.focus()};
+cartBtn.addEventListener('click',openCart);$('#mbar').addEventListener('click',openCart);$('#closeCart').addEventListener('click',closeCart);scrim.addEventListener('click',closeCart);
 document.addEventListener('keydown',e=>{if(e.key==='Escape'&&drawer.classList.contains('open'))closeCart()});
 $$('[data-cta="order"]').forEach(a=>a.addEventListener('click',()=>{if(qtyTotal()>0)setTimeout(openCart,0)}));
 
@@ -1283,7 +1402,7 @@ function onScroll(){
   hdr.classList.toggle('scrolled',scrollY>10);
   const mid=innerHeight*.35;let act=secs[0];secs.forEach(s=>{if(s.getBoundingClientRect().top<mid)act=s});
   $$('.nav a').forEach(a=>a.classList.toggle('active',a.getAttribute('href')==='#'+act.id));
-  onScrollSteps();ticking=false;
+  onScrollSteps();spyMenu();ticking=false;
 }
 addEventListener('scroll',()=>{if(!ticking){ticking=true;requestAnimationFrame(onScroll)}},{passive:true});
 onScroll();
