@@ -514,6 +514,62 @@ button{font:inherit;cursor:pointer;color:inherit}
 @keyframes mbarIn{from{transform:translateY(120%)}}
 @keyframes mbarBump{40%{transform:scale(1.04)}}
 
+
+/* ===== Monte o seu ===== */
+.builder{background:var(--char);color:var(--on-char);position:relative;overflow:hidden;overflow:clip;isolation:isolate}
+.builder::before{content:"";position:absolute;inset:0;background:radial-gradient(40% 50% at 25% 55%,rgba(207,78,26,.28),transparent 70%);z-index:-1}
+.builder .sec-head .eyebrow{color:var(--gold)}
+.builder .sec-head .sub{color:var(--on-char-muted)}
+.b-grid{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.1fr);gap:24px;align-items:start}
+.b-stage{position:sticky;top:calc(env(safe-area-inset-top,0px) + var(--hdr) + 16px);background:#FBF6EF;border-radius:28px;min-height:520px;display:grid;place-items:end center;padding:40px 28px 46px;overflow:hidden}
+.b-stage::before{content:"";position:absolute;left:50%;top:46%;width:min(78%,380px);aspect-ratio:1;border-radius:50%;background:#EFE5D8;transform:translate(-50%,-50%)}
+.b-plate{position:absolute;bottom:34px;left:50%;width:70%;height:22px;border-radius:50%;background:rgba(60,30,10,.18);filter:blur(6px);transform:translateX(-50%)}
+.b-burger{position:relative;width:min(100%,400px);display:flex;justify-content:center}
+.b-burger svg{width:100%;max-height:430px;height:auto;overflow:visible}
+.b-burger .layer{transition:transform .35s cubic-bezier(.3,1.4,.5,1)}
+.drop-new{animation:bDrop .6s cubic-bezier(.22,1.5,.5,1)}
+@keyframes bDrop{from{transform:translateY(-200px);opacity:0}50%{opacity:1}}
+.b-hint{position:absolute;top:22px;left:0;right:0;text-align:center;font-family:var(--f-mono);font-size:.78rem;color:#7A6458;letter-spacing:.06em}
+.b-side{display:grid;grid-template-columns:minmax(0,1fr);gap:16px;min-width:0}
+.b-card{min-width:0}
+.b-card{background:var(--surface);color:var(--ink);border-radius:22px;padding:20px}
+.b-label{font-family:var(--f-mono);font-size:.74rem;letter-spacing:.14em;text-transform:uppercase;color:var(--muted);font-weight:600;margin:0 0 12px;line-height:1.3}
+.b-label small{letter-spacing:.02em;text-transform:none;font-weight:400;margin-left:6px}
+.b-presets{display:flex;gap:8px;flex-wrap:wrap}
+.b-pre{border:0;background:var(--ink);color:var(--bg);border-radius:999px;padding:10px 16px;font-weight:700;font-size:.9rem;transition:background .2s,transform .15s}
+.b-pre:hover{transform:translateY(-2px)}
+.b-pre[aria-pressed="true"]{background:var(--ember);color:var(--ember-ink)}
+.b-ings{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:10px}
+.ing{position:relative}
+.ing-add{width:100%;height:100%;display:grid;justify-items:center;gap:2px;border:2px solid var(--line);background:var(--surface-2);border-radius:16px;padding:10px 6px 9px;text-align:center;transition:border-color .2s,background .2s,transform .15s}
+.ing-add:hover{border-color:var(--ember)}
+.ing-add:active{transform:scale(.94)}
+.ing-add svg{width:92%;height:34px;overflow:hidden;border-radius:6px}
+.ing-n{font-weight:700;font-size:.8rem;line-height:1.15}
+.ing-p{font-family:var(--f-mono);font-size:.68rem;color:var(--muted)}
+.ing.on .ing-add{border-color:var(--ember);background:color-mix(in srgb,var(--ember) 9%,var(--surface))}
+.ing-q{position:absolute;top:-7px;right:-7px;min-width:24px;height:24px;border-radius:999px;background:var(--ember);color:var(--ember-ink);font-family:var(--f-mono);font-weight:600;font-size:.78rem;display:none;place-items:center;padding:0 6px;box-shadow:0 4px 10px -4px rgba(0,0,0,.4)}
+.ing.on .ing-q{display:grid;animation:pop .3s cubic-bezier(.3,1.8,.5,1)}
+.ing-rm{position:absolute;top:-7px;left:-7px;width:24px;height:24px;border-radius:50%;border:0;background:var(--ink);color:var(--bg);font-weight:700;line-height:1;display:none;place-items:center}
+.ing.on .ing-rm{display:grid}
+.b-name{font-size:clamp(2rem,4vw,2.8rem);color:var(--ember)}
+.b-name.swap{animation:fadeUp .45s cubic-bezier(.2,.9,.2,1)}
+.b-nums{display:flex;gap:28px;margin-top:12px}
+.b-nums small{display:block;font-size:.76rem;color:var(--muted)}
+.b-nums b{font-family:var(--f-display);font-size:1.9rem;font-weight:800;font-variant-numeric:tabular-nums;line-height:1.05}
+.b-list{list-style:none;margin:14px 0 0;padding:12px 0 0;border-top:1px dashed var(--line);display:flex;flex-wrap:wrap;gap:6px}
+.b-list li{font-size:.8rem;border:1px solid var(--line);border-radius:999px;padding:3px 10px;animation:fadeUp .3s ease}
+.b-actions{display:flex;gap:10px;margin-top:16px}
+.b-clear{border:1px solid var(--line);background:none;border-radius:999px;padding:0 20px;font-weight:700}
+.b-clear:hover{border-color:var(--ink)}
+.b-add{flex:1;justify-content:center;white-space:nowrap;padding-inline:18px;min-width:0}
+.b-clear{flex:none}
+.b-add:disabled{opacity:.45;cursor:not-allowed;transform:none;box-shadow:none}
+.b-msg{font-size:.82rem;color:var(--ember);margin-top:8px;min-height:1.2em}
+.b-msg:empty{display:none}
+@media (max-width:900px){.b-grid{grid-template-columns:minmax(0,1fr)}.b-stage{min-height:0;height:250px;padding:30px 20px 28px;z-index:5;border-radius:22px;box-shadow:0 18px 30px -18px rgba(0,0,0,.6)}.b-burger svg{max-height:200px}.b-plate{bottom:20px}.b-stage::before{width:200px;top:50%}}
+@media (max-width:620px){.b-ings{grid-template-columns:repeat(3,minmax(0,1fr));gap:9px}.b-card{padding:16px;border-radius:18px}.b-presets{flex-wrap:nowrap;overflow-x:auto;scrollbar-width:none}.b-presets::-webkit-scrollbar{display:none}.b-pre{flex:none}.b-stage{height:220px}.b-burger svg{max-height:175px}}
+
 /* Scroll reveal: always visible at rest; animates only when it scrolls into view */
 .reveal.in{animation:rise .9s cubic-bezier(.2,.9,.2,1) both;animation-delay:var(--d,0s)}
 @keyframes rise{from{opacity:0;transform:translateY(44px)}}
@@ -660,6 +716,49 @@ button{font:inherit;cursor:pointer;color:inherit}
       </div>
     </nav>
     <div class="menu-list" id="grid"></div>
+  </div>
+</section>
+
+<section class="sec builder" id="monte">
+  <div class="wrap">
+    <div class="sec-head reveal">
+      <div>
+        <p class="eyebrow">Monte o seu</p>
+        <h2>Sua chapa, suas regras.</h2>
+        <p class="sub">Comece por um pronto ou monte do zero, ingrediente por ingrediente. O preço e as calorias atualizam na hora.</p>
+      </div>
+    </div>
+    <div class="b-grid">
+      <div class="b-stage" id="bStage" aria-live="polite">
+        <p class="b-hint" id="bHint">Toque nos ingredientes para montar</p>
+        <div class="b-plate"></div>
+        <div class="b-burger" id="bBurger" role="img" aria-label="Prévia do seu lanche"></div>
+      </div>
+      <div class="b-side">
+        <div class="b-card">
+          <h3 class="b-label">Prontos para começar</h3>
+          <div class="b-presets" id="bPresets"></div>
+        </div>
+        <div class="b-card">
+          <h3 class="b-label">Ingredientes <small>toque para pôr, − para tirar</small></h3>
+          <div class="b-ings" id="bIngs"></div>
+        </div>
+        <div class="b-card b-sum">
+          <p class="b-label">Seu lanche</p>
+          <h3 class="b-name" id="bName">Monte seu lanche</h3>
+          <div class="b-nums">
+            <div><small>Preço</small><b id="bPrice">R$ 12,00</b></div>
+            <div><small>Calorias estimadas</small><b id="bKcal">280 kcal</b></div>
+          </div>
+          <ul class="b-list" id="bList"></ul>
+          <div class="b-actions">
+            <button class="b-clear" id="bClear" type="button">Limpar</button>
+            <button class="btn btn-primary b-add" id="bAdd" type="button" disabled>Adicionar ao pedido</button>
+          </div>
+          <p class="b-msg" id="bMsg"></p>
+        </div>
+      </div>
+    </div>
   </div>
 </section>
 
@@ -1111,7 +1210,47 @@ const MENU=[
 const byId=Object.fromEntries(MENU.map(m=>[m.id,m]));
 const COMBO=22.9,COMBO_SAVE=byId.batata.price+byId.suica.price-COMBO;
 /* cart keys are "id" or "id|combo" */
-const item=key=>{const [id,c]=String(key).split('|');const m=byId[id];if(!m||(c&&(c!=='combo'||m.cat!=='burgers')))return null;
+/* ---------- Monte o seu: ingredientes (preço em R$, calorias em kcal) ---------- */
+const B_BASE={n:'Brioche com gergelim',p:12,c:280};
+const ING=[
+  {k:'patty',n:'Carne 180 g',p:14,c:320,max:3,prot:1},
+  {k:'veg',n:'Grão-de-bico',p:12,c:220,max:2,prot:1},
+  {k:'cheese',n:'Cheddar',p:4,c:90,max:3},
+  {k:'bacon',n:'Bacon',p:6,c:120,max:2},
+  {k:'lettuce',n:'Alface',p:1,c:5,max:2},
+  {k:'tomato',n:'Tomate',p:2,c:10,max:2},
+  {k:'onion',n:'Cebola roxa',p:2,c:15,max:2},
+  {k:'pickles',n:'Picles',p:2,c:5,max:2},
+  {k:'jalapeno',n:'Jalapeño',p:3,c:5,max:2},
+  {k:'mush',n:'Cogumelos',p:5,c:40,max:2},
+  {k:'sauce',n:'Molho Brasa',p:0,c:60,max:1},
+  {k:'bbq',n:'Barbecue',p:2,c:50,max:1}
+];
+const INGK=Object.fromEntries(ING.map(i=>[i.k,i]));
+const B_PRESETS=[
+  {n:'Clássico',q:{patty:1,cheese:1,lettuce:1,tomato:1,pickles:1,onion:1,sauce:1}},
+  {n:'Duplo',q:{patty:2,cheese:2,onion:1,pickles:1,sauce:1}},
+  {n:'Bacon',q:{patty:1,cheese:1,bacon:2,onion:1,bbq:1}},
+  {n:'Picante',q:{patty:1,cheese:1,jalapeno:2,lettuce:1,sauce:1}},
+  {n:'Vegetariano',q:{veg:1,cheese:1,lettuce:1,tomato:1,onion:1,sauce:1}}
+];
+const encQ=q=>ING.filter(i=>q[i.k]>0).map(i=>i.k+q[i.k]).join('.');
+const decQ=str=>{const q={};for(const part of String(str).split('.')){const m=/^([a-z]+)([1-9])$/.exec(part);if(!m||!INGK[m[1]]||+m[2]>INGK[m[1]].max||q[m[1]])return null;q[m[1]]=+m[2]}return q};
+const qProt=q=>ING.filter(i=>i.prot).reduce((a,i)=>a+(q[i.k]||0),0);
+const qPrice=q=>B_BASE.p+ING.reduce((a,i)=>a+i.p*(q[i.k]||0),0);
+const qKcal=q=>B_BASE.c+ING.reduce((a,i)=>a+i.c*(q[i.k]||0),0);
+function qName(q){const p=q.patty||0,v=q.veg||0;if(!p&&!v)return 'Monte seu lanche';
+  if(p>=3)return 'Brasa Monstro';if(!p&&v)return 'Horta da Casa';if(q.jalapeno)return 'Brasa Pegando Fogo';
+  if(q.bacon)return p>1?'Duplo Bacon da Brasa':'Brasa com Bacon';if(q.mush)return 'Brasa da Floresta';if(p===2)return 'Duplo da Brasa';return 'Brasa da Chapa'}
+const qDesc=q=>ING.filter(i=>q[i.k]).map(i=>(q[i.k]>1?q[i.k]+'x ':'')+i.n.toLowerCase()).join(', ');
+function layersFor(q){const L=['bunBottom'];const rep=(k,n)=>{for(let i=0;i<(n||0);i++)L.push(k)};
+  rep('sauce',q.sauce);rep('bbq',q.bbq);rep('lettuce',q.lettuce);rep('tomato',q.tomato);
+  const prot=[...Array(q.patty||0).fill('patty'),...Array(q.veg||0).fill('veg')];let ch=q.cheese||0;
+  prot.forEach(k=>{L.push(k);if(ch>0){L.push('cheese');ch--}});rep('cheese',ch);
+  rep('bacon',q.bacon);rep('mush',q.mush);rep('onion',q.onion);rep('pickles',q.pickles);rep('jalapeno',q.jalapeno);L.push('bunTop');return L}
+function customItem(key){const q=decQ(String(key).slice(7));if(!q||!qProt(q))return null;
+  return {m:{id:'custom'},name:`${qName(q)} (montado: ${qDesc(q)})`,price:qPrice(q)}}
+const item=key=>{if(String(key).startsWith('custom|'))return customItem(key);const [id,c]=String(key).split('|');const m=byId[id];if(!m||(c&&(c!=='combo'||m.cat!=='burgers')))return null;
   return c?{m,name:m.name+' + combo',price:m.price+COMBO}:{m,name:m.name,price:m.price}};
 const norm=t=>t.normalize('NFD').replace(/[̀-ͯ]/g,'').toLowerCase();
 const artCache={};
@@ -1248,6 +1387,45 @@ grid.addEventListener('click',e=>{
   fl.animate([{transform:`translate(${sx}px,${sy}px) scale(1.2)`,opacity:1},{transform:`translate(${(sx+ex)/2}px,${Math.min(sy,ey)-120}px) scale(.8) rotate(-20deg)`,opacity:1,offset:.5},{transform:`translate(${ex}px,${ey}px) scale(.2) rotate(-40deg)`,opacity:.3}],{duration:850,easing:'cubic-bezier(.5,0,.3,1)'}).onfinish=()=>{fl.remove();land()};
   toast(`<i>+1</i> ${item(key).name}`);
 });
+
+/* ---------- Monte o seu: lógica ---------- */
+(()=>{const stage=$('#bBurger'),ingsEl=$('#bIngs'),presetsEl=$('#bPresets');let bq={},prevLayers=[];
+  const icon=k=>{const L=LAYERS[k],R=rng(7),y=L.h+20;return `<svg viewBox="50 ${y-L.h-12} 200 ${L.h+26}" preserveAspectRatio="xMidYMid meet" aria-hidden="true">${L.d(y,R)}</svg>`};
+  ingsEl.innerHTML=ING.map(i=>`<div class="ing" data-k="${i.k}"><button class="ing-add" type="button" data-ing="${i.k}" aria-label="Pôr ${i.n}, mais ${money(i.p)}">${icon(i.k)}<span class="ing-n">${i.n}</span><span class="ing-p">${i.p?'+ '+money(i.p):'grátis'}</span></button><button class="ing-rm" type="button" data-ing-rm="${i.k}" aria-label="Tirar ${i.n}">−</button><span class="ing-q" aria-hidden="true"></span></div>`).join('');
+  presetsEl.innerHTML=B_PRESETS.map((pr,i)=>`<button class="b-pre" type="button" data-pre="${i}">${pr.n}</button>`).join('');
+  let shownPrice=qPrice({}),shownKcal=qKcal({}),numRaf=0;
+  function animateNums(){cancelAnimationFrame(numRaf);const tp=qPrice(bq),tk=qKcal(bq),fp=shownPrice,fk=shownKcal,t0=performance.now();
+    const step=t=>{const k=reduce?1:Math.min(1,(t-t0)/450),e=1-Math.pow(1-k,3);shownPrice=fp+(tp-fp)*e;shownKcal=fk+(tk-fk)*e;
+      $('#bPrice').textContent=money(shownPrice);$('#bKcal').textContent=Math.round(shownKcal)+' kcal';if(k<1)numRaf=requestAnimationFrame(step)};numRaf=requestAnimationFrame(step)}
+  function render(){
+    const layers=layersFor(bq);stage.innerHTML=burgerSVG(layers,99).html;
+    let d=0;while(d<layers.length&&d<prevLayers.length&&layers[d]===prevLayers[d])d++;
+    if(!reduce&&prevLayers.length&&layers.length>prevLayers.length){const g=stage.querySelectorAll('.layer')[d];g&&g.classList.add('drop-new')}
+    prevLayers=layers;
+    $$('#bIngs .ing').forEach(el=>{const n=bq[el.dataset.k]||0,i=INGK[el.dataset.k];el.classList.toggle('on',n>0);el.classList.toggle('full',n>=i.max);el.querySelector('.ing-q').textContent=n||''});
+    const enc=encQ(bq);$$('.b-pre').forEach((b,i)=>b.setAttribute('aria-pressed',encQ(B_PRESETS[i].q)===enc));
+    const name=qName(bq),nameEl=$('#bName');if(nameEl.textContent!==name){nameEl.textContent=name;if(!reduce){nameEl.classList.remove('swap');void nameEl.offsetWidth;nameEl.classList.add('swap')}}
+    $('#bList').innerHTML=`<li>${B_BASE.n}</li>`+ING.filter(i=>bq[i.k]).map(i=>`<li>${bq[i.k]>1?`<b>${bq[i.k]}x</b> `:''}${i.n}</li>`).join('');
+    const ok=qProt(bq)>0;$('#bAdd').disabled=!ok;$('#bAdd').textContent=ok?`Adicionar · ${money(qPrice(bq))}`:'Adicionar ao pedido';
+    $('#bHint').hidden=Object.keys(bq).length>0;$('#bMsg').textContent=ok||!Object.keys(bq).length?'':'Escolha uma carne ou o grão-de-bico para fechar o lanche.';
+    animateNums();
+  }
+  ingsEl.addEventListener('click',e=>{const a=e.target.closest('[data-ing]'),r=e.target.closest('[data-ing-rm]');
+    if(a){const k=a.dataset.ing,i=INGK[k];if((bq[k]||0)>=i.max){toast(`Máximo de ${i.max} ${i.n.toLowerCase()}`);return}bq[k]=(bq[k]||0)+1;buzz()}
+    else if(r){const k=r.dataset.ingRm;if(bq[k]>1)bq[k]--;else delete bq[k]}else return;render()});
+  presetsEl.addEventListener('click',e=>{const b=e.target.closest('[data-pre]');if(!b)return;bq={...B_PRESETS[+b.dataset.pre].q};prevLayers=['bunBottom','bunTop'];render()});
+  $('#bClear').addEventListener('click',()=>{bq={};prevLayers=[];render()});
+  $('#bAdd').addEventListener('click',()=>{if(!qProt(bq))return;const key='custom|'+encQ(bq);if(!item(key))return;
+    cart[key]=Math.min(99,(cart[key]||0)+1);placed=null;buzz();
+    const land=()=>{sync(true);cartBtn.classList.remove('shake');void cartBtn.offsetWidth;cartBtn.classList.add('shake')};
+    toast(`<i>+1</i> ${qName(bq)}`);
+    const a=stage.getBoundingClientRect(),z=cartBtn.getBoundingClientRect();
+    if(reduce||!document.body.animate){land();return}
+    const fl=document.createElement('div');fl.className='flyer';fl.innerHTML=burgerSVG(layersFor(bq),99).html;document.body.appendChild(fl);
+    const sx=a.left+a.width/2-45,sy=a.top+a.height/2-45,ex=z.left+z.width/2-45,ey=z.top+z.height/2-45;
+    fl.animate([{transform:`translate(${sx}px,${sy}px) scale(1.4)`},{transform:`translate(${(sx+ex)/2}px,${Math.min(sy,ey)-120}px) scale(.8) rotate(-20deg)`,offset:.5},{transform:`translate(${ex}px,${ey}px) scale(.2) rotate(-40deg)`,opacity:.3}],{duration:850,easing:'cubic-bezier(.5,0,.3,1)'}).onfinish=()=>{fl.remove();land()}});
+  render();
+})();
 
 /* ---------- Comanda + pedido pelo WhatsApp ---------- */
 /* Troque pelo número de WhatsApp da loja: código do país + DDD + número, só dígitos. */

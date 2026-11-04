@@ -7,6 +7,7 @@ Landing page de uma hamburgueria artesanal em Pinheiros, São Paulo.
 - Topo com burger que se monta sozinho, faíscas de brasa e vapor
 - Cardápio com 24 itens no estilo dos apps de delivery: lista por categoria (burgers, porções, bebidas e sobremesas), barra de categorias fixa que acompanha a rolagem, busca, combo nos burgers e botão de quantidade (− 1 +) direto no card
 - No celular: cards compactos (foto + nome + preço) e barra fixa "Ver pedido" com o total
+- **Monte o seu lanche:** escolha um pronto (Clássico, Duplo, Bacon, Picante, Vegetariano) ou toque nos 12 ingredientes; o burger se monta na tela, ganha nome automático e o preço e as calorias atualizam na hora
 - Carrinho em forma de comanda, com retirada ou entrega (grátis acima de R$ 120)
 - **Pedido pelo WhatsApp:** o cliente preenche nome, endereço, pagamento e observações, e o site abre o WhatsApp da loja com o pedido já escrito
 - Seção "Anatomia" com o burger que desmonta pelo botão, pelo controle deslizante ou tocando nele
@@ -27,6 +28,8 @@ No `index.html`, procure por `COMO EDITAR O CARDÁPIO`. Logo abaixo está a list
 - **Categoria:** `cat:'burgers'`, `'sides'`, `'drinks'` ou `'desserts'`
 - **Tirar um item:** apague o bloco inteiro dele
 - **Novo item:** copie um bloco parecido e troque o `id`
+
+Os ingredientes do "Monte o seu" ficam logo abaixo, em `const ING=[`: dá para mudar o preço (`p`), as calorias (`c`) e a quantidade máxima (`max`) de cada um.
 
 ## Segurança
 
