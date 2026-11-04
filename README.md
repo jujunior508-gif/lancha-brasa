@@ -5,7 +5,7 @@ Landing page de uma hamburgueria artesanal em Pinheiros, São Paulo.
 ## O que tem
 
 - Topo com burger que se monta sozinho, faíscas de brasa e vapor
-- Cardápio com 24 itens no estilo dos apps de delivery: lista por categoria (burgers, porções, bebidas e sobremesas), barra de categorias fixa que acompanha a rolagem, busca, filtros (vegetariano, picante, sem glúten, para dividir), combo nos burgers e botão de quantidade (− 1 +) direto no card
+- Cardápio com 24 itens no estilo dos apps de delivery: lista por categoria (burgers, porções, bebidas e sobremesas), barra de categorias fixa que acompanha a rolagem, busca, combo nos burgers e botão de quantidade (− 1 +) direto no card
 - No celular: cards compactos (foto + nome + preço) e barra fixa "Ver pedido" com o total
 - Carrinho em forma de comanda, com retirada ou entrega (grátis acima de R$ 120)
 - **Pedido pelo WhatsApp:** o cliente preenche nome, endereço, pagamento e observações, e o site abre o WhatsApp da loja com o pedido já escrito

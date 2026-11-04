@@ -648,12 +648,6 @@ button{font:inherit;cursor:pointer;color:inherit}
         <span class="sr">Buscar no cardápio</span>
         <input id="menuSearch" type="search" placeholder="Buscar: bacon, cheddar, doce de leite…" autocomplete="off">
       </label>
-      <div class="chips" role="group" aria-label="Filtros">
-        <button class="chip" data-tag="veg" aria-pressed="false"><i style="background:#7FB84A"></i>Vegetariano</button>
-        <button class="chip" data-tag="hot" aria-pressed="false"><i style="background:#E2471B"></i>Picante</button>
-        <button class="chip" data-tag="gf" aria-pressed="false"><i style="background:#E8A63A"></i>Sem glúten</button>
-        <button class="chip" data-tag="share" aria-pressed="false"><i style="background:#8A5C38"></i>Para dividir</button>
-      </div>
       <p class="result-count" id="resultCount" aria-live="polite"></p>
     </div>
     <nav class="menu-nav" id="menuNav" aria-label="Categorias do cardápio">
@@ -1197,7 +1191,7 @@ function renderMenu(animate){
   const pool=MENU.filter(matches),filtered=query||activeTags.size;
   $$('.tab').forEach(t=>{const n=pool.filter(m=>m.cat===t.dataset.cat).length;t.querySelector('small').textContent=n;t.disabled=!n});
   $('#resultCount').textContent=filtered?`${pool.length} ${pool.length===1?'item encontrado':'itens encontrados'}${query?` para “${$('#menuSearch').value.trim()}”`:''}`:`${pool.length} itens no cardápio`;
-  if(!pool.length){grid.innerHTML=`<div class="no-results"><b>Nada por aqui</b><p>Nenhum item combina com a busca e os filtros escolhidos.</p><button id="clearFilters">Limpar busca e filtros</button></div>`;
+  if(!pool.length){grid.innerHTML=`<div class="no-results"><b>Nada por aqui</b><p>Nenhum item combina com a busca.</p><button id="clearFilters">Limpar busca</button></div>`;
     $('#clearFilters').onclick=()=>{query='';$('#menuSearch').value='';activeTags.clear();$$('.chip').forEach(c=>c.setAttribute('aria-pressed','false'));renderMenu(true)};return}
   grid.innerHTML=CATS.map(([c,label])=>{const its=pool.filter(m=>m.cat===c);if(!its.length)return '';
     return `<section class="cat-group" id="cat-${c}" data-cat="${c}" aria-label="${label}"><h3 class="cat-title">${label} <small>${its.length}</small></h3><div class="grid">${its.map(cardHTML).join('')}</div></section>`}).join('');
