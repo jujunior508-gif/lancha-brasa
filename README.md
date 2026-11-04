@@ -28,6 +28,7 @@ No `index.html`, procure por `COMO EDITAR O CARDÁPIO`. Logo abaixo está a list
 - **Categoria:** `cat:'burgers'`, `'sides'`, `'drinks'` ou `'desserts'`
 - **Tirar um item:** apague o bloco inteiro dele
 - **Novo item:** copie um bloco parecido e troque o `id`
+- **Foto real:** coloque o arquivo na pasta `fotos/` e acrescente `foto:'fotos/nome.jpg'` no item (veja `fotos/LEIA-ME.md`)
 
 Os ingredientes do "Monte o seu" ficam logo abaixo, em `const ING=[`: dá para mudar o preço (`p`), as calorias (`c`) e a quantidade máxima (`max`) de cada um.
 

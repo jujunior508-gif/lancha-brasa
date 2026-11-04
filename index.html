@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<meta http-equiv="Content-Security-Policy" content="default-src 'none'; script-src 'unsafe-inline'; style-src 'unsafe-inline' https://fonts.googleapis.com; font-src https://fonts.gstatic.com; img-src data:; connect-src 'none'; object-src 'none'; base-uri 'none'; form-action 'none'">
+<meta http-equiv="Content-Security-Policy" content="default-src 'none'; script-src 'unsafe-inline'; style-src 'unsafe-inline' https://fonts.googleapis.com; font-src https://fonts.gstatic.com; img-src 'self' data:; connect-src 'none'; object-src 'none'; base-uri 'none'; form-action 'none'">
 <meta name="referrer" content="strict-origin-when-cross-origin">
 <meta name="description" content="Brasa & Pão: hamburgueria artesanal em Pinheiros, São Paulo. Blend moído todo dia, brioche da casa, monte seu lanche e peça pelo WhatsApp.">
 <meta name="theme-color" content="#17110E">
@@ -214,6 +214,10 @@ button{font:inherit;cursor:pointer;color:inherit}
 @keyframes cardIn{from{opacity:0;transform:translateY(40px) scale(.96)}}
 .pic{position:relative;aspect-ratio:5/4;max-width:100%;background:var(--studio);display:grid;place-items:center;overflow:hidden}
 .pic::after{content:"";position:absolute;inset:0;background:radial-gradient(60% 40% at 50% 0%,rgba(255,214,160,.16),transparent 70%);pointer-events:none}
+.pic .photo{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;transition:transform .8s cubic-bezier(.2,.8,.2,1),filter .4s}
+.pic.has-photo::after{background:linear-gradient(to top,rgba(10,6,4,.45),transparent 40%),radial-gradient(60% 40% at 50% 0%,rgba(255,214,160,.12),transparent 70%)}
+.card:hover .pic .photo{transform:scale(1.07);filter:saturate(1.08) contrast(1.03)}
+.pic.has-photo .kcal{color:#fff;text-shadow:0 1px 3px rgba(0,0,0,.6)}
 .pic svg{width:74%;height:84%;overflow:visible;transition:transform .7s cubic-bezier(.2,.8,.2,1);filter:drop-shadow(0 18px 18px rgba(0,0,0,.35))}
 .pic .layer{transition:transform .6s cubic-bezier(.3,1.4,.5,1);transition-delay:calc(var(--i) * 18ms)}
 .card:hover .pic .layer{transform:translateY(calc(var(--i) * -6px))}
@@ -1155,6 +1159,8 @@ const A_BUN='Contém glúten, lactose, ovo e gergelim.';
    - descrição:  desc:'...'
    - selo:       badge:'Mais pedido'  (apague a linha para tirar o selo)
    - categoria:  cat:'burgers' | 'sides' | 'drinks' | 'desserts'
+   - foto:       foto:'fotos/classico.jpg'  (coloque o arquivo na pasta fotos/ do site;
+                 sem esta linha aparece a ilustração)
    - filtros:    tags:['veg','hot','gf','share']  (vegetariano, picante, sem glúten, para dividir)
    Para tirar um item do cardápio, apague o bloco inteiro dele.
    Para criar um item novo, copie um bloco parecido e troque o id (sem espaços nem acentos).
@@ -1269,6 +1275,11 @@ const item=key=>{if(String(key).startsWith('custom|'))return customItem(key);con
 const norm=t=>t.normalize('NFD').replace(/[̀-ͯ]/g,'').toLowerCase();
 const artCache={};
 const art=m=>artCache[m.id]||(artCache[m.id]=m.layers?burgerSVG(m.layers,m.id.length*13+7).html:m.svg());
+/* Foto real quando o item tem "foto"; se o arquivo faltar, volta para a ilustração */
+const safeSrc=u=>/^(fotos\/[\w.-]+\.(jpe?g|png|webp|avif)|data:image\/(jpeg|png|webp|avif);base64,[A-Za-z0-9+\/=]+)$/i.test(u||'')?u:'';
+const picHTML=m=>{const src=safeSrc(m.foto);if(!src)return art(m);
+  return `<img class="photo" src="${src}" alt="Foto do ${m.name}" loading="lazy" decoding="async" width="1200" height="960" onerror="this.closest('.pic').classList.remove('has-photo');this.outerHTML=window.__art&&window.__art('${m.id}')||''">`};
+window.__art=id=>byId[id]?art(byId[id]):'';
 
 /* ---------- Hero burger ---------- */
 const heroLayers=['bunBottom','sauce','lettuce','tomato','patty','cheese','bacon','pickles','onion','bunTop'];
@@ -1328,7 +1339,7 @@ function rowHTML(m){const k=keyFor(m.id),q=cart[k]||0,price=item(k).price;
   return `<div class="stepper" role="group" aria-label="Quantidade de ${m.name}"><button data-step="-1" data-id="${m.id}" aria-label="Tirar um">${q===1?'<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" aria-hidden="true"><path d="M5 7h14M10 7V4h4v3M7 7l1 13h8l1-13"/></svg>':'−'}</button><span class="q" aria-live="polite">${q}</span><button data-step="1" data-id="${m.id}" aria-label="Pôr mais um">+</button></div><b class="row-total">${money(price*q)}</b>`}
 function cardHTML(m,n){return `
     <article class="card${comboOn.has(m.id)?' expanded':''}" style="--n:${n%3}" data-card="${m.id}">
-      <div class="pic">${m.badge?`<span class="badge${m.veg?' veg':''}${m.hot?' hot':''}">${m.badge}</span>`:''}<span class="kcal">≈ ${m.kcal} kcal</span>${art(m)}</div>
+      <div class="pic${safeSrc(m.foto)?' has-photo':''}">${m.badge?`<span class="badge${m.veg?' veg':''}${m.hot?' hot':''}">${m.badge}</span>`:''}<span class="kcal">≈ ${m.kcal} kcal</span>${picHTML(m)}</div>
       <div class="body">
         <div class="title-row"><h3>${m.name}</h3><span class="price">${money(m.price)}</span></div>
         <p class="spec">${m.spec}</p>
